@@ -1,0 +1,1220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Personality Archive</title>
+<meta name="description" content="Every answer opens another door. An interactive archive of original quizzes about instincts, imagination and the stories you tell yourself.">
+<meta name="theme-color" content="#0B0A12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0A12;--plum:#21172E;--violet:#6547A8;--lav:#B6A3D7;--champ:#E6D7B5;--white:#F4F0F7;
+  --line:rgba(182,163,215,.24);--line-strong:rgba(230,215,181,.5);
+  --serif:"Cormorant Garamond","Playfair Display",Georgia,serif;
+  --sans:"DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);color-scheme:dark;background:var(--bg);scroll-behavior:smooth;height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--white);font:400 1rem/1.65 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+   radial-gradient(60vw 50vh at 85% -5%,rgba(101,71,168,.38),transparent 70%),
+   radial-gradient(50vw 50vh at -5% 40%,rgba(33,23,46,.9),transparent 70%),
+   radial-gradient(40vw 40vh at 60% 110%,rgba(101,71,168,.22),transparent 70%);
+  animation:drift 40s ease-in-out infinite alternate}
+body::after{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.07;mix-blend-mode:screen;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+@keyframes drift{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-2%,1.5%,0) scale(1.06)}}
+img,svg,canvas{max-width:100%}
+a{color:var(--champ);text-underline-offset:3px}
+a:hover{color:var(--white)}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.08;margin:0;letter-spacing:-.005em}
+h1{font-size:clamp(2.7rem,7.4vw,5.8rem)}
+h2{font-size:clamp(2rem,4.6vw,3.3rem)}
+h3{font-size:1.55rem}
+p{margin:0 0 1em}
+:focus-visible{outline:2px solid var(--champ);outline-offset:3px;border-radius:2px}
+h1:focus,h2:focus{outline:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(1180px,100% - 2.5rem);margin-inline:auto}
+.narrow{width:min(760px,100% - 2.5rem);margin-inline:auto}
+.eyebrow{font:500 .74rem/1.4 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--champ);margin:0 0 1.1rem}
+.lede{font-size:clamp(1.05rem,1.6vw,1.25rem);color:rgba(244,240,247,.84);max-width:34em}
+.muted{color:rgba(244,240,247,.68)}
+.serif{font-family:var(--serif)}
+section{position:relative}
+.sec{padding:clamp(3.5rem,8vw,6.5rem) 0}
+.sec-head{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:flex-end;justify-content:space-between;margin-bottom:2.2rem}
+.sec-head p{max-width:32em;margin:.7rem 0 0}
+
+/* header */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;padding-top:env(safe-area-inset-top,0px);background:linear-gradient(rgba(11,10,18,.94),rgba(11,10,18,.78));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.mark{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--white);font:500 1.35rem/1 var(--serif);letter-spacing:.04em}
+.mark svg{width:30px;height:30px;flex:none}
+.links{display:flex;gap:1.9rem;list-style:none;margin:0;padding:0}
+.links a{color:rgba(244,240,247,.8);text-decoration:none;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;padding:.5rem 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.links a:hover,.links a[aria-current=page]{color:var(--champ);border-color:var(--champ)}
+.burger{display:none;background:none;border:1px solid var(--line);color:var(--white);width:44px;height:44px;border-radius:4px;cursor:pointer;align-items:center;justify-content:center}
+.burger span,.burger span::before,.burger span::after{display:block;width:18px;height:1.5px;background:currentColor;position:relative;transition:transform .25s,opacity .25s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+.burger[aria-expanded=true] span{background:transparent}
+.burger[aria-expanded=true] span::before{transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded=true] span::after{transform:translateY(-6px) rotate(-45deg)}
+main{padding-top:64px;min-height:70vh}
+@media(max-width:860px){
+  .burger{display:inline-flex}
+  .links{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));left:0;right:0;flex-direction:column;gap:0;background:rgba(11,10,18,.98);border-bottom:1px solid var(--line);padding:.5rem 1.25rem 1.2rem;transform:translateY(-8px);opacity:0;visibility:hidden;transition:opacity .2s,transform .2s,visibility .2s}
+  .links.open{opacity:1;transform:none;visibility:visible}
+  .links a{display:block;padding:1rem 0;font-size:.9rem;border-bottom:1px solid var(--line)}
+}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:48px;padding:.8rem 1.5rem;border:1px solid var(--line-strong);border-radius:3px;background:transparent;color:var(--white);font:500 .86rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s}
+.btn:hover{background:rgba(230,215,181,.1);color:var(--white);border-color:var(--champ)}
+.btn:active{transform:translateY(1px)}
+.btn.primary{background:var(--champ);color:#17101f;border-color:var(--champ)}
+.btn.primary:hover{background:var(--white);color:#17101f}
+.btn.small{min-height:40px;padding:.55rem 1rem;font-size:.74rem}
+.btn[disabled],.btn[aria-disabled=true]{opacity:.45;cursor:not-allowed;pointer-events:none}
+.btn.quiet{border-color:var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}
+
+/* hero */
+.hero{min-height:calc(100vh - 64px);min-height:calc(100svh - 64px);display:flex;align-items:center;overflow:hidden;padding:2rem 0 3rem}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+.hero h1{margin-bottom:1.4rem}
+.hero .cta{margin:2rem 0 1.2rem}
+.fine{font:italic 400 1.1rem var(--serif);color:var(--lav)}
+.hero-visual{position:relative;aspect-ratio:1/1.05;max-width:480px;width:100%;margin-inline:auto}
+.rings{position:absolute;inset:-6%;width:112%;height:112%;animation:spin 140s linear infinite;opacity:.9}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rec{position:absolute;left:50%;top:46%;width:46%;aspect-ratio:3/4.2;margin:-23% 0 0 -23%;border:1px solid var(--line-strong);border-radius:4px;background:linear-gradient(170deg,#2a1d3b,#14101e);padding:.7rem;display:flex;flex-direction:column;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);animation:fan 1.4s cubic-bezier(.2,.8,.2,1) both}
+.rec small{font:500 .6rem/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--champ)}
+.rec svg{flex:1;min-height:0;width:100%;margin:.3rem 0}
+.rec b{font:500 1.05rem/1.1 var(--serif);display:block}
+.rec i{font-size:.62rem;color:var(--lav);font-style:normal;letter-spacing:.05em}
+.rec:nth-child(2){--tx:-62%;--r:-11deg;--ty:6%}
+.rec:nth-child(3){--tx:0%;--r:2deg;--ty:-6%;animation-delay:.12s}
+.rec:nth-child(4){--tx:62%;--r:12deg;--ty:8%;animation-delay:.24s}
+@keyframes fan{from{opacity:0;transform:translate(0,10%) rotate(0)}to{opacity:1;transform:translate(var(--tx),var(--ty)) rotate(var(--r))}}
+.rec{transform:translate(calc(var(--tx) + var(--px,0px)*var(--k,1)),calc(var(--ty) + var(--py,0px)*var(--k,1))) rotate(var(--r))}
+.tagline{position:absolute;left:0;right:0;bottom:-2rem;text-align:center;font:italic 400 1.15rem var(--serif);color:var(--champ);margin:0}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-visual{max-width:360px;margin-top:1rem;margin-bottom:2rem}.hero{align-items:flex-start;padding-top:2.5rem}}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.4rem}
+.card{position:relative;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:4px;background:linear-gradient(180deg,rgba(33,23,46,.72),rgba(21,15,30,.5));overflow:hidden;transition:border-color .3s,transform .25s ease-out,box-shadow .3s;transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.card:hover{border-color:var(--line-strong);transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-3px);box-shadow:0 24px 50px -28px rgba(101,71,168,.9)}
+.cover{display:block;aspect-ratio:5/3;width:100%;background:var(--plum);border-bottom:1px solid var(--line)}
+.cover svg{display:block;width:100%;height:100%}
+.card-b{padding:1.2rem 1.3rem 1.4rem;display:flex;flex-direction:column;gap:.55rem;flex:1}
+.card-b h3{font-size:1.5rem}
+.card-b p{font-size:.94rem;color:rgba(244,240,247,.74);margin:0}
+.chip{display:inline-block;font:500 .66rem/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--line);color:var(--lav);padding:.38rem .6rem;border-radius:2px}
+.chip.gold{color:var(--champ);border-color:var(--line-strong)}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.8rem;color:var(--lav)}
+.card-b .btn{margin-top:auto;align-self:flex-start}
+.card-b .grow{flex:1}
+.no{position:absolute;top:.8rem;left:.9rem;font:500 .66rem var(--sans);letter-spacing:.18em;color:var(--champ);text-transform:uppercase;background:rgba(11,10,18,.7);padding:.3rem .5rem;border:1px solid var(--line);border-radius:2px}
+.tag-up{position:absolute;top:.8rem;right:.9rem;font:500 .66rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--bg);background:var(--lav);padding:.3rem .5rem;border-radius:2px}
+
+/* featured */
+.feat{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:auto auto;gap:1.4rem}
+.feat-main{grid-row:span 2;min-height:520px;display:flex;align-items:flex-end;border:1px solid var(--line-strong);border-radius:4px;overflow:hidden;position:relative;background:var(--plum)}
+.feat-main .cover{position:absolute;inset:0;aspect-ratio:auto;height:100%;border:0}
+.feat-main::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,10,18,.96) 12%,rgba(11,10,18,.35) 60%,transparent)}
+.feat-main .in{position:relative;z-index:2;padding:clamp(1.4rem,3vw,2.4rem);max-width:34rem}
+.feat-main h3{font-size:clamp(2rem,4vw,3rem);margin:.7rem 0}
+.feat-side{display:grid;grid-template-columns:1fr;gap:1.4rem}
+.lucky{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between;border:1px dashed var(--line-strong);border-radius:4px;padding:1.4rem 1.6rem;margin-top:1.4rem;grid-column:1/-1}
+@media(max-width:900px){.feat{grid-template-columns:1fr}.feat-main{min-height:440px;grid-row:auto}}
+
+/* categories */
+.cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.cat{display:block;padding:1.3rem 1.4rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none;color:var(--white);transition:background .25s}
+.cat:hover{background:rgba(101,71,168,.2);color:var(--white)}
+.cat b{display:block;font:500 1.45rem/1.15 var(--serif);margin-bottom:.35rem}
+.cat span{font-size:.8rem;color:var(--lav)}
+
+/* filters */
+.filters{display:flex;flex-direction:column;gap:1.1rem;margin-bottom:2rem}
+.search{position:relative;max-width:520px}
+.search input{width:100%;min-height:50px;background:rgba(33,23,46,.6);border:1px solid var(--line);border-radius:3px;color:var(--white);padding:.8rem 1rem;font:inherit}
+.search input::placeholder{color:rgba(244,240,247,.5)}
+.chips{display:flex;flex-wrap:wrap;gap:.55rem}
+.chips button{min-height:40px;background:transparent;border:1px solid var(--line);color:rgba(244,240,247,.85);padding:.5rem .95rem;border-radius:999px;font:500 .8rem var(--sans);cursor:pointer;transition:all .2s}
+.chips button:hover{border-color:var(--champ)}
+.chips button[aria-pressed=true]{background:var(--champ);color:#17101f;border-color:var(--champ)}
+.check{display:inline-flex;gap:.6rem;align-items:center;font-size:.9rem;cursor:pointer;min-height:40px}
+.check input{width:20px;height:20px;accent-color:var(--champ)}
+.empty{border:1px dashed var(--line-strong);border-radius:4px;padding:clamp(2rem,6vw,4rem);text-align:center}
+.empty h3{font-size:2rem;margin-bottom:.6rem}
+.empty p{max-width:30em;margin-inline:auto}
+
+/* quiz */
+.qwrap{padding:2.2rem 0 4rem}
+.back-link{display:inline-block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--lav);margin-bottom:1.4rem}
+.welcome .cover{border:1px solid var(--line-strong);border-radius:4px;margin:1rem 0 2rem;aspect-ratio:16/8}
+.welcome h1{font-size:clamp(2.3rem,6vw,4rem);margin-bottom:1rem}
+.how{margin:1.8rem 0 2rem;padding:0;list-style:none;display:grid;gap:.7rem}
+.how li{padding:.9rem 1.1rem;border-left:2px solid var(--champ);background:rgba(33,23,46,.55);font-size:.96rem}
+.banner{border:1px solid var(--line-strong);background:rgba(101,71,168,.2);border-radius:3px;padding:1rem 1.2rem;margin:0 0 1.5rem;font-size:.95rem}
+.progress{height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--violet),var(--champ));transition:width .6s cubic-bezier(.2,.8,.2,1)}
+.pmeta{display:flex;justify-content:space-between;align-items:center;margin:.8rem 0 2.4rem;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lav)}
+.dots{display:flex;gap:6px}
+.dots span{width:7px;height:7px;border-radius:50%;border:1px solid var(--lav);transition:background .3s}
+.dots span.done{background:var(--lav)}
+.dots span.cur{background:var(--champ);border-color:var(--champ)}
+.panel{animation:inR .45s cubic-bezier(.2,.8,.2,1) both}
+.panel.l{animation-name:inL}
+@keyframes inR{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes inL{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+.panel h2{font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.18;margin-bottom:1.8rem}
+.answers{display:grid;gap:.85rem}
+.ans{display:flex;gap:1rem;align-items:flex-start;text-align:left;width:100%;min-height:64px;padding:1rem 1.2rem;background:rgba(33,23,46,.55);border:1px solid var(--line);border-radius:4px;color:var(--white);font:400 1.02rem/1.5 var(--sans);cursor:pointer;transition:border-color .25s,background .25s,transform .25s}
+.ans:hover{border-color:var(--lav);background:rgba(101,71,168,.2)}
+.ans:active{transform:scale(.995)}
+.ans .k{flex:none;width:28px;height:28px;border:1px solid var(--line-strong);border-radius:50%;display:grid;place-items:center;font:500 .76rem var(--sans);color:var(--champ);margin-top:1px}
+.ans[aria-checked=true]{border-color:var(--champ);background:linear-gradient(90deg,rgba(101,71,168,.55),rgba(101,71,168,.2))}
+.ans[aria-checked=true] .k{background:var(--champ);color:#17101f}
+.qnav{display:flex;justify-content:space-between;gap:1rem;margin-top:2.2rem}
+.hint{font-size:.78rem;color:rgba(244,240,247,.55);margin-top:1.4rem}
+@media(max-width:560px){.hint{display:none}}
+
+/* result */
+.res-hero{display:grid;grid-template-columns:minmax(220px,380px) 1fr;gap:clamp(1.5rem,5vw,4rem);align-items:center;padding:2rem 0 1rem}
+.sigil-box{aspect-ratio:1;border:1px solid var(--line-strong);border-radius:50%;background:radial-gradient(circle,rgba(101,71,168,.35),transparent 70%);padding:6%}
+.res-hero h1{font-size:clamp(2.6rem,7vw,5rem);margin:.4rem 0 .7rem}
+.res-tag{font:italic 400 clamp(1.2rem,2.4vw,1.6rem) var(--serif);color:var(--champ);margin-bottom:1.2rem}
+@media(max-width:760px){.res-hero{grid-template-columns:1fr;text-align:center}.sigil-box{max-width:260px;margin:0 auto}.res-hero .row{justify-content:center}}
+.blocks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem;margin:2.5rem 0}
+.block{border:1px solid var(--line);border-radius:4px;padding:1.5rem 1.6rem;background:rgba(33,23,46,.45)}
+.block h3{font-size:1.5rem;margin-bottom:.8rem;color:var(--champ)}
+.block ul{margin:0;padding-left:1.1rem}
+.block li{margin-bottom:.55rem}
+.quote{grid-column:1/-1;text-align:center;border:0;background:none;padding:2rem 0}
+.quote blockquote{margin:0;font:italic 500 clamp(1.7rem,4vw,2.8rem)/1.25 var(--serif);max-width:24em;margin-inline:auto}
+.quote cite{display:block;margin-top:1rem;font:500 .74rem var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--lav);font-style:normal}
+.bars{display:grid;gap:.7rem}
+.bar{display:grid;grid-template-columns:150px 1fr 42px;gap:.8rem;align-items:center;font-size:.86rem}
+.bar div{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--violet),var(--champ));transform-origin:left;animation:grow 1.1s .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.reveal .sigil-box{animation:rv 1.2s cubic-bezier(.2,.8,.2,1) both}
+.reveal .rv{animation:rv .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rv{from{opacity:0;transform:translateY(16px) scale(.98);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.disc{font-size:.84rem;color:rgba(244,240,247,.6);border-top:1px solid var(--line);padding-top:1rem;margin-top:2rem}
+
+/* archetypes */
+.sig-card{text-align:left;cursor:pointer;font:inherit;color:inherit;padding:0}
+.sig-card .sbox{aspect-ratio:1.5;padding:1rem;background:radial-gradient(circle at 50% 50%,rgba(101,71,168,.35),transparent 70%);border-bottom:1px solid var(--line)}
+.sig-card .sbox svg{height:100%;width:100%}
+.group-h{margin:2.4rem 0 1.2rem;display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap}
+
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:2rem 0}
+.cmp .block{text-align:center}
+.cmp .sigil-box{max-width:150px;margin:0 auto 1rem;border-radius:50%}
+.field{display:grid;gap:.4rem;margin-bottom:1rem}
+.field label{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--lav)}
+select,.field input[type=text]{min-height:48px;background:rgba(33,23,46,.8);border:1px solid var(--line);color:var(--white);border-radius:3px;padding:.6rem .9rem;font:inherit;width:100%}
+.sum{font:italic 500 clamp(1.6rem,3.4vw,2.4rem)/1.2 var(--serif);color:var(--champ);margin:0 0 .5rem}
+@media(max-width:620px){.cmp{grid-template-columns:1fr}}
+
+/* prose */
+.prose{padding:3rem 0 5rem}
+.prose h1{font-size:clamp(2.4rem,6vw,4rem);margin-bottom:1.5rem}
+.prose h2{font-size:clamp(1.6rem,3vw,2.1rem);margin:2.6rem 0 .8rem;color:var(--champ)}
+.prose p,.prose li{max-width:42em;color:rgba(244,240,247,.86)}
+.prose ul,.prose ol{padding-left:1.2rem}
+.prose pre{background:rgba(33,23,46,.7);border:1px solid var(--line);border-radius:4px;padding:1rem;overflow-x:auto;font-size:.82rem;line-height:1.5;max-width:100%}
+.prose code{font-family:ui-monospace,Menlo,monospace;font-size:.88em;color:var(--lav)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:3rem 0 3.5rem;margin-top:3rem;background:rgba(11,10,18,.6)}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem}
+.foot h4{font:500 .74rem var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--champ);margin-bottom:.9rem}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.foot a{color:rgba(244,240,247,.8);text-decoration:none;font-size:.92rem}
+.foot a:hover{color:var(--champ)}
+.foot .small{font-size:.82rem;color:rgba(244,240,247,.6);max-width:28em}
+@media(max-width:700px){.foot{grid-template-columns:1fr}}
+
+/* modal + toast */
+.mb{position:fixed;inset:0;z-index:90;background:rgba(5,4,10,.78);backdrop-filter:blur(6px);display:grid;place-items:center;padding:1rem;animation:fade .25s both}
+.modal{width:min(560px,100%);max-height:calc(100vh - 2rem);overflow:auto;background:linear-gradient(180deg,#2a1d3b,#17101f);border:1px solid var(--line-strong);border-radius:6px;padding:1.6rem;position:relative;animation:pop .35s cubic-bezier(.2,.8,.2,1) both}
+.modal.wide{width:min(760px,100%)}
+.modal h2{font-size:2rem;margin-bottom:.8rem;padding-right:2.5rem}
+.x{position:absolute;top:.8rem;right:.8rem;width:44px;height:44px;border:1px solid var(--line);background:transparent;color:var(--white);border-radius:50%;font-size:1.3rem;cursor:pointer}
+@keyframes fade{from{opacity:0}}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}}
+.cardprev{display:block;max-height:52vh;width:auto;max-width:100%;margin:0 auto 1.2rem;border-radius:6px;border:1px solid var(--line-strong)}
+.toasts{position:fixed;left:50%;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:120;display:grid;gap:.5rem;width:min(92vw,420px);pointer-events:none}
+.toast{background:var(--champ);color:#17101f;padding:.8rem 1.1rem;border-radius:4px;font-size:.92rem;font-weight:500;animation:pop .3s both;box-shadow:0 14px 30px -10px rgba(0,0,0,.7)}
+.tilt{display:block}
+.loading{min-height:60vh;display:grid;place-items:center;color:var(--lav);font:italic 1.5rem var(--serif)}
+.list-row{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 1.4rem;border:1px solid var(--line);border-radius:4px;padding:1rem 1.2rem;background:rgba(33,23,46,.45);margin-bottom:1rem}
+.list-row .mini{width:70px;height:70px;flex:none}
+.list-row .grow{flex:1;min-width:200px}
+.list-row h3{font-size:1.5rem}
+
+/* ---- richer motion ---- */
+.pg{animation:pagein .55s cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes pagein{from{opacity:0;transform:translateY(10px)}}
+.rec:nth-child(2){--k:.6}.rec:nth-child(3){--k:1.1}.rec:nth-child(4){--k:1.7}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(440px circle at var(--hx,72%) var(--hy,30%),rgba(101,71,168,.26),transparent 62%)}
+.hero h1 .w{display:inline-block;animation:wordin 1s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i)*.08s + .15s)}
+.stg{animation:wordin 1s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:var(--d,0s)}
+@keyframes wordin{from{opacity:0;transform:translateY(.55em);filter:blur(8px)}}
+.rv-s{opacity:0}
+.rv-s.in{opacity:1;animation:rise .85s cubic-bezier(.2,.8,.2,1) var(--d,0s) backwards}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}}
+.card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(230,215,181,.16),transparent 65%)}
+.card:hover::after{opacity:1}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:0;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:translateX(-130%) skewX(-18deg);pointer-events:none}
+.btn:hover::after{transform:translateX(300%) skewX(-18deg);transition:transform .8s ease}
+.progress i{position:relative}
+.progress i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);background-size:60% 100%;background-repeat:no-repeat;animation:shim 2.4s ease-in-out infinite}
+@keyframes shim{from{background-position:-100% 0}to{background-position:220% 0}}
+.panel h2{animation:wordin .7s cubic-bezier(.2,.8,.2,1) backwards}
+.panel .ans{animation:ansin .55s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i)*.08s + .15s)}
+@keyframes ansin{from{opacity:0;transform:translateX(18px)}}
+.panel .ans[aria-checked=true]{animation:selpulse .6s ease-out}
+@keyframes selpulse{0%{box-shadow:0 0 0 0 rgba(230,215,181,.55)}100%{box-shadow:0 0 0 16px rgba(230,215,181,0)}}
+.ans[aria-checked=true] .k{animation:kpop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes kpop{from{transform:scale(.4)}}
+.draw .dr{stroke-dasharray:1;stroke-dashoffset:1;animation:dash 2.2s cubic-bezier(.4,0,.2,1) .2s forwards}
+@keyframes dash{to{stroke-dashoffset:0}}
+.draw circle:not(.dr){transform-box:fill-box;transform-origin:center;animation:starin .8s cubic-bezier(.3,1.5,.5,1) backwards;animation-delay:1.2s}
+@keyframes starin{from{opacity:0;transform:scale(0)}}
+.draw svg{animation:slowrot 120s linear infinite}
+@keyframes slowrot{to{transform:rotate(360deg)}}
+.sigil-box.draw{animation:none}
+@media (prefers-reduced-motion:reduce){
+  .rv-s{opacity:1}.draw .dr{stroke-dasharray:none;stroke-dashoffset:0}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .rings{animation:none}
+}
+</style>
+</head>
+<body>
+<a class="sr" href="#main" id="skip" style="position:absolute;left:8px;top:8px;z-index:200">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="mark" href="#/" aria-label="The Personality Archive, home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#E6D7B5" stroke-width="1"/><circle cx="20" cy="20" r="11" fill="none" stroke="#B6A3D7" stroke-width=".8"/><path d="M20 4 L33 27 L7 27 Z" fill="none" stroke="#E6D7B5" stroke-width=".8"/><circle cx="20" cy="20" r="2" fill="#E6D7B5"/></svg>
+      <span>The Personality Archive</span>
+    </a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="links" aria-label="Menu"><span></span></button>
+    <nav aria-label="Primary"><ul class="links" id="links">
+      <li><a href="#/discover" data-nav="discover">Discover</a></li>
+      <li><a href="#/explore" data-nav="explore">Explore Quizzes</a></li>
+      <li><a href="#/archetypes" data-nav="archetypes">Archetypes</a></li>
+      <li><a href="#/archive" data-nav="archive">Saved Results</a></li>
+      <li><a href="#/about" data-nav="about">About</a></li>
+    </ul></nav>
+  </div>
+</header>
+<main id="main"><div class="loading" role="status">Opening the archive…</div></main>
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="mark" href="#/"><span>The Personality Archive</span></a>
+      <p class="serif" style="font-size:1.3rem;font-style:italic;color:var(--champ);margin:.8rem 0 .6rem">Every answer opens another door.</p>
+      <p class="small">An entertainment and self-reflection experience. Results are fictional archetypes, not diagnoses, and not a scientific measurement.</p>
+    </div>
+    <div><h4>Explore</h4><ul>
+      <li><a href="#/explore">Explore Quizzes</a></li><li><a href="#/archetypes">Archetype Library</a></li><li><a href="#/archive">Your Archive</a></li><li><a href="#/compare">Compare Your Archives</a></li></ul></div>
+    <div><h4>Information</h4><ul>
+      <li><a href="#/about">About</a></li><li><a href="#/privacy">Privacy Policy</a></li></ul></div>
+  </div>
+</footer>
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+<div id="modal-root"></div>
+<noscript><p style="padding:2rem;text-align:center">The Personality Archive needs JavaScript to run its quizzes.</p></noscript>
+
+<script>
+"use strict";
+/* ============================================================
+   CONFIG
+   ============================================================ */
+const CFG = { domain: null }; // set e.g. "personalityarchive.com" to print a custom domain on share cards
+const SITE = () => CFG.domain || location.host || "thepersonalityarchive";
+const BASE = () => location.href.split("#")[0];
+
+/* ============================================================
+   DATA MODEL
+   Quiz { id,title,category,blurb,minutes,status:'open'|'soon',badge?,accent,axes[4],
+          intro, results[Result], questions[{q, a:[{t, s:{resultId:weight}}]}] }
+   Result { id,name,tag,intro,strengths[],blind[],approach,quote,relate[],vec[4 (0-3)],accent }
+   SCORING MODEL
+   - Every answer adds weights (0-2) to one or more results. Totals are summed across questions.
+   - Highest total wins. Ties break by the weights on the final question, then by the listed order of results.
+   - Answer order is shuffled per question, so the position of an answer never reveals its archetype.
+   - vec holds each archetype's 0-3 lean on four tendencies; it powers the friend comparison only.
+   ============================================================ */
+const CATEGORIES = ["Personality Archetypes","Social Energy","Decision-Making","Imagination and Creativity","Fictional Identities","Friendship Dynamics","Habits and Tendencies","Self-Reflection"];
+
+const QUIZZES = [
+{ id:"villain", n:1, title:"What Kind of Villain Would You Be?", category:"Fictional Identities", minutes:3, status:"open", badge:"Featured exploration", accent:"#E6D7B5",
+  blurb:"Seven small betrayals, locked doors and open microphones reveal the antagonist hiding in your instincts.",
+  intro:"A theatrical record. Nobody is actually plotting anything. This is about the stories your instincts would tell if the stakes were fictional and the lighting was dramatic.",
+  axes:["Planning","Expression","Privacy","Spontaneity"],
+  results:[
+   {id:"ma",name:"The Mastermind",tag:"Strategic, patient, and analytical",accent:"#E6D7B5",vec:[3,1,2,0],
+    intro:"You treat every situation as a long game. While others react to the moment, you're already mapping where it leads and who will be standing where. Your menace, if you have any, is composure.",
+    strengths:["Sees several moves ahead and plans for the one nobody mentioned","Stays level while the room around you heats up","Turns scattered details into leverage and clarity"],
+    blind:["A plan can start to feel more real than the people it involves","Waiting for the perfect opening can quietly become never moving","Allies may feel kept at arm's length when you hold the whole map yourself"],
+    approach:"Gather quietly, decide deliberately, move once. You would rather spend a week preparing than a minute improvising.",
+    quote:"Patience isn't waiting. It's ambition with better manners.",
+    relate:["Replaying a meeting and finding the three things nobody said aloud","Having a backup for the backup, and a joke ready in case you need neither","Feeling quietly annoyed when a plan changes without an explanation"]},
+   {id:"re",name:"The Charismatic Rebel",tag:"Persuasive, expressive, and independent",accent:"#B6A3D7",vec:[1,3,0,2],
+    intro:"You don't scheme from the shadows; you walk into the light and make the room choose. People follow you because you say what they were circling, and you say it as if it had always been obvious.",
+    strengths:["Rallies a room around an idea in a single sentence","Honest about what you want, which makes you hard to manipulate","Brave in the moment others wait out"],
+    blind:["Winning the room can start to matter more than winning the outcome","Directness can land as a challenge when you meant it as a gift","Independence can shade into refusing help that was freely offered"],
+    approach:"Say it plainly, say it first, and let the reaction show you who is with you.",
+    quote:"If the story is going to be told anyway, I'd rather hold the pen.",
+    relate:["Being the person friends text when someone needs to say the quiet part out loud","Having strong opinions about a rule you heard five minutes ago","Leaving a conversation with more allies, and more critics, than you arrived with"]},
+   {id:"ph",name:"The Phantom",tag:"Observant, private, and unpredictable",accent:"#9D86D6",vec:[2,0,3,1],
+    intro:"You notice what others miss and share only what serves you. By the time anyone realizes you were paying attention, you have already adjusted. Mystery isn't a performance for you; it's how you conserve yourself.",
+    strengths:["Reads people and rooms with unusual accuracy","Holds calm under pressure because you aren't performing for it","Hard to predict, hard to pressure, hard to rush"],
+    blind:["Privacy can look like distance to people who care about you","You may carry decisions alone that would be lighter shared","Slipping away can feel easier than one short, uncomfortable conversation"],
+    approach:"Observe first, reveal late. You act when you're sure, and you rarely announce it.",
+    quote:"I never vanished. You just stopped looking at the quiet parts.",
+    relate:["Knowing who is lying about being fine before they know it themselves","Preferring the edge of the room because the view is better","Answering questions with exactly as much truth as the moment needs"]},
+   {id:"ch",name:"The Chaos Architect",tag:"Imaginative, spontaneous, and unconventional",accent:"#D8B4F0",vec:[0,2,1,3],
+    intro:"Where others see a mess, you see raw material. You would rather build something strange from the ruins of the plan than polish a plan that was never going to surprise anyone. Your gift is turning disorder into design.",
+    strengths:["Finds usable ideas in situations everyone else writes off","Adapts instantly when the ground shifts","Makes the unexpected feel intentional"],
+    blind:["Constant reinvention can leave projects unfinished","Others may not know which version of the plan is the real one","Boredom can push you to disrupt things that were quietly working"],
+    approach:"Start moving, collect the surprises, and build the plan from whatever the first attempt teaches you.",
+    quote:"A blueprint is just a rumor about what could be built.",
+    relate:["Keeping seven browser tabs that are secretly one coherent idea","Making your best decisions three minutes after the deadline is announced","Feeling more alive when the schedule collapses than when it holds"]}
+  ],
+  questions:[
+   {q:"You discover that someone has taken credit for something you worked hard to create. What is your first instinct?",a:[
+     {t:"Walk away and protect your peace.",s:{ph:2}},
+     {t:"Quietly plan a clever response.",s:{ma:2,ph:1}},
+     {t:"Confront the situation directly, with an audience if possible.",s:{re:2}},
+     {t:"Let it stand for now, then turn it into an unexpected opportunity.",s:{ch:2,re:1}}]},
+   {q:"In an old house, a locked door carries a handwritten note: “Open only if you're ready.” What do you do?",a:[
+     {t:"Try every key on the ring just to see what happens.",s:{ch:2}},
+     {t:"Knock three times and announce yourself.",s:{re:2}},
+     {t:"Study the lock, the hinges and the handwriting first.",s:{ma:2}},
+     {t:"Leave it closed, but remember exactly where it is.",s:{ph:2,ma:1}}]},
+   {q:"Someone hands you a microphone at a gathering of strangers. What happens next?",a:[
+     {t:"Pass it along. You would rather watch the room.",s:{ph:2}},
+     {t:"Say what everyone is thinking, vividly.",s:{re:2}},
+     {t:"Say something unexpected and see who reacts.",s:{ch:2,re:1}},
+     {t:"Deliver a line you rehearsed in your head on the way over.",s:{ma:2}}]},
+   {q:"A rival's big plan collapses, and the pieces are lying on the table. What do you do?",a:[
+     {t:"Use the wreckage to build something stranger.",s:{ch:2}},
+     {t:"Study what failed so you never repeat it.",s:{ma:2}},
+     {t:"Offer them a public alliance, on your terms.",s:{re:2,ma:1}},
+     {t:"Step in with a quiet fix and no announcement.",s:{ph:2,ma:1}}]},
+   {q:"You're designing your ideal hideout. What does it look like?",a:[
+     {t:"A house that rearranges its rooms every week.",s:{ch:2}},
+     {t:"A library with exactly one hidden room.",s:{ma:2,ph:1}},
+     {t:"A lighthouse nobody visits.",s:{ph:2}},
+     {t:"A theatre where the stage lights never go off.",s:{re:2}}]},
+   {q:"A friend asks what you've been working on lately. What do you say?",a:[
+     {t:"The whole story, with gestures and a dramatic pause.",s:{re:2}},
+     {t:"Something true, but incomplete.",s:{ph:2}},
+     {t:"A version that keeps changing as you describe it.",s:{ch:2}},
+     {t:"A question that steers them somewhere more interesting.",s:{ma:2,ph:1}}]},
+   {q:"Years from now, someone describes your biggest move. What would you hope they say?",a:[
+     {t:"Nobody could agree on what actually happened.",s:{ch:2,ph:1}},
+     {t:"They never really knew you, and that was the point.",s:{ph:2}},
+     {t:"Nobody saw it coming, and yet it all makes sense now.",s:{ma:2,ph:1}},
+     {t:"They could not stop talking about it.",s:{re:2}}]}
+  ]},
+
+{ id:"misunderstood", n:2, title:"What Do People Often Misunderstand About You?", category:"Self-Reflection", minutes:4, status:"soon", accent:"#B6A3D7",
+  blurb:"A gentle look at the gap between how you come across and how you mean it." },
+{ id:"universe", n:3, title:"Which Fictional Universe Matches Your Imagination?", category:"Fictional Identities", minutes:4, status:"soon", accent:"#9D86D6",
+  blurb:"Step through original, invented worlds and find the one that thinks like you do." },
+
+{ id:"trio", n:4, title:"Are You the Strategist, the Dreamer, or the Wildcard?", category:"Personality Archetypes", minutes:3, status:"open", badge:"Editor's Pick", accent:"#B6A3D7",
+  blurb:"Deadlines move, plans collapse and a stranger offers you odds. See which instinct steps forward.",
+  intro:"Three ways of meeting an uncertain world, each with its own kind of brilliance. There is no best answer, only the one that feels most like your first move.",
+  axes:["Structure","Vision","Improvisation","Steadiness"],
+  results:[
+   {id:"st",name:"The Strategist",tag:"Structured, steady, and quietly decisive",accent:"#E6D7B5",vec:[3,1,0,3],
+    intro:"You turn uncertainty into a sequence. Give you a goal and a deadline and you will have a route, with contingencies, before most people finish their questions. Your calm is built, not accidental.",
+    strengths:["Breaks overwhelming goals into steps people can actually take","Keeps promises, and notices when others can't","Plans for friction before it arrives"],
+    blind:["A tidy plan can crowd out a better idea that doesn't fit it","You may read flexibility in others as a lack of commitment","Unplanned time can feel uncomfortable even when it's exactly what you needed"],
+    approach:"Define the target, map the route, review often. You adjust the plan, never the destination.",
+    quote:"Surprises are just details that haven't been scheduled yet.",
+    relate:["Opening a calendar the way some people open a favorite book","Quietly rearranging the group chat's plan into something that works","Feeling genuinely calm when a checklist is one item shorter"]},
+   {id:"dr",name:"The Dreamer",tag:"Imaginative, far-sighted, and idea-rich",accent:"#B6A3D7",vec:[0,3,1,1],
+    intro:"You live partly in a version of things that doesn't exist yet, and you describe it so vividly that others want to move in. Your gift is direction: you know where something could go long before anyone can prove it.",
+    strengths:["Sees possibilities that make other people braver","Connects ideas across wildly different areas","Keeps motivation alive by keeping the “why” bright"],
+    blind:["Ideas can multiply faster than they get finished","Details may feel like a betrayal of the vision until they quietly sink it","You might wait for inspiration when a small, unglamorous step would do"],
+    approach:"Imagine the destination first, then look for the first honest step toward it.",
+    quote:"Every map was once somebody's impossible daydream.",
+    relate:["Describing a project in so much detail that it already feels finished","Keeping notes that begin with “what if”","Being most productive in the half hour before sleep"]},
+   {id:"wi",name:"The Wildcard",tag:"Adaptive, bold, and delightfully hard to predict",accent:"#D8B4F0",vec:[1,1,3,0],
+    intro:"You thrive in the gap between plan and reality. When the script is torn up, you are the one who makes the next scene better. People rarely know what you will do next, and sometimes neither do you.",
+    strengths:["Acts quickly while others are still deliberating","Makes uncertainty feel like play instead of threat","Reads a situation and changes direction without ego"],
+    blind:["Momentum can outrun commitments you've already made","Others may struggle to rely on a plan that bends with your mood","You might skip the preparation that would have made the leap easier"],
+    approach:"Move first, learn fast, and let the situation tell you what the plan should have been.",
+    quote:"I don't leave things to chance. I just make friends with it.",
+    relate:["Saying yes before checking what you're saying yes to","Doing your sharpest thinking out loud, mid-motion","Being the reason a quiet evening turned into a story"]}
+  ],
+  questions:[
+   {q:"A project deadline is suddenly moved up by a week. What is your first move?",a:[
+     {t:"Ask what the project could become if the constraint were an invitation.",s:{dr:2}},
+     {t:"Rebuild the timeline and cut what isn't essential.",s:{st:2}},
+     {t:"Start immediately and work out the details in motion.",s:{wi:2}},
+     {t:"Find the one thing only you can deliver and protect it.",s:{st:1,dr:1}}]},
+   {q:"Your friends ask you to organize a weekend trip. How does it take shape?",a:[
+     {t:"Book the first night and let the rest unfold.",s:{wi:2}},
+     {t:"Choose the destination for its atmosphere and its story.",s:{dr:2}},
+     {t:"Let the group vote, then adapt as people change their minds.",s:{st:1,wi:1}},
+     {t:"Build a shared itinerary with times, maps and a rain plan.",s:{st:2}}]},
+   {q:"You're given an empty room for a month, no instructions attached. What becomes of it?",a:[
+     {t:"It changes purpose every few days.",s:{wi:2}},
+     {t:"A tidy, efficient workspace, ready on day one.",s:{st:2}},
+     {t:"It stays empty until it tells you what it needs.",s:{dr:1,wi:1}},
+     {t:"Walls covered in maps, sketches and half-built ideas.",s:{dr:2}}]},
+   {q:"A stranger offers you a ten percent chance at something extraordinary. What do you say?",a:[
+     {t:"Ask for the fine print, then say yes.",s:{st:1,wi:1}},
+     {t:"Say yes before they finish the sentence.",s:{wi:2}},
+     {t:"Work out what it would cost to try, and what it would cost to wonder.",s:{st:2}},
+     {t:"Imagine in detail what you'd do if it worked.",s:{dr:2}}]},
+   {q:"A conversation has gone quiet and a bit stuck. What do you do?",a:[
+     {t:"Wait. Silence often fixes itself.",s:{st:1,dr:1}},
+     {t:"Offer a strange “what if” and see where it goes.",s:{dr:2}},
+     {t:"Change the subject with a joke.",s:{wi:2}},
+     {t:"Redirect with a clear question about what the group needs.",s:{st:2}}]},
+   {q:"Halfway through a project you realize you made a mistake. What follows?",a:[
+     {t:"You pivot on the spot and keep moving.",s:{wi:2}},
+     {t:"You wonder whether the mistake is pointing somewhere better.",s:{dr:2}},
+     {t:"You pause, take a walk, then decide.",s:{dr:1,st:1}},
+     {t:"You document what happened and adjust the process.",s:{st:2}}]},
+   {q:"Which of these would you most like to be remembered for?",a:[
+     {t:"Making hard things look effortless.",s:{st:1,wi:1}},
+     {t:"Seeing things before anyone else did.",s:{dr:2}},
+     {t:"Being impossible to predict.",s:{wi:2}},
+     {t:"Always having a plan B, and C.",s:{st:2}}]}
+  ]},
+
+{ id:"friendship", n:5, title:"How Do You Navigate Friendship?", category:"Friendship Dynamics", minutes:4, status:"soon", accent:"#E6D7B5",
+  blurb:"Texts, silences, invitations and long catch-ups: how you show up for the people you keep." },
+
+{ id:"creative", n:6, title:"What Is Your Creative Archetype?", category:"Imagination and Creativity", minutes:3, status:"open", badge:"New addition", accent:"#D8B4F0",
+  blurb:"An empty room, a clashing idea and some honest feedback reveal the way you make things.",
+  intro:"Creativity wears many disguises: building, mixing, choosing, wandering. This archive looks for the one that feels most like yours, whatever medium you work in.",
+  axes:["Structure","Blending","Taste","Curiosity"],
+  results:[
+   {id:"ar",name:"The Architect",tag:"Systematic, deliberate, and built to last",accent:"#E6D7B5",vec:[3,1,2,0],
+    intro:"You make things the way great buildings get made: foundation first, then proportion, then flourish. Your creativity lives in the logic of how pieces relate, and what you make tends to feel inevitable.",
+    strengths:["Turns vague ideas into frameworks others can build on","Finishes what you start","Spots structural weaknesses early"],
+    blind:["A framework can become a cage if you won't let it bend","Rough early drafts may feel unbearable to show","You can underrate ideas that arrive messy"],
+    approach:"Define the constraints, build the skeleton, then decorate with confidence.",
+    quote:"Constraints aren't walls. They're the shape of the room I get to furnish.",
+    relate:["Naming files properly even for projects nobody will see","Feeling most inspired right after a good outline","Rearranging a shelf because the proportions bothered you"]},
+   {id:"al",name:"The Alchemist",tag:"Inventive, experimental, and fond of unlikely pairings",accent:"#D8B4F0",vec:[1,3,0,2],
+    intro:"Your best ideas happen where two things that shouldn't touch do. You mix, test and keep whatever sparks. What you make rarely resembles its ingredients, and that's the point.",
+    strengths:["Produces genuinely surprising combinations","Comfortable with failed experiments","Brings fresh angles to stale problems"],
+    blind:["Novelty can win out over what actually serves the work","Experiments may pile up without becoming finished pieces","Explaining your process can be harder than doing it"],
+    approach:"Combine, test, watch what reacts, then keep the strangest successful result.",
+    quote:"If it doesn't surprise me, it isn't finished mixing.",
+    relate:["Cooking, writing and designing with the same “what if I add this?” energy","Keeping a folder of references that make no sense together","Being asked where an idea came from and genuinely not knowing"]},
+   {id:"cu",name:"The Curator",tag:"Discerning, intentional, and fluent in taste",accent:"#B6A3D7",vec:[1,1,3,1],
+    intro:"You create by choosing: what belongs, what doesn't, and how things sit beside one another. Your eye is your instrument, turning collections into statements and ordinary rooms into atmospheres.",
+    strengths:["Recognizes quality quickly and can explain why","Edits ruthlessly so the work can breathe","Builds mood and cohesion from disparate pieces"],
+    blind:["High standards can turn into hesitation to begin","You might lean on other people's work longer than your own voice needs","Strong taste can slide into dismissing what was simply different"],
+    approach:"Gather widely, remove generously, then arrange until every element feels chosen.",
+    quote:"The art is half in what I put in the frame and half in what I left out.",
+    relate:["Keeping a private list of things you'd never put in a room","Saving a reference for years before finally using it","Spotting the one wrong object in an otherwise perfect photograph"]},
+   {id:"wa",name:"The Wanderer",tag:"Curious, exploratory, and led by the journey",accent:"#9D86D6",vec:[0,2,1,3],
+    intro:"You don't wait for a destination; you follow what pulls at you and discover the project along the way. Your work carries the texture of wherever you've been, and often ends up somewhere you never planned.",
+    strengths:["Gathers fresh material from unexpected places","Open-minded and unusually quick to learn","Makes work with a genuine sense of discovery"],
+    blind:["Following the next interesting thing can leave good work behind","Projects may lack a clear shape until late","Direction can feel like constraint, so you avoid committing to one"],
+    approach:"Start walking, notice what holds your attention, and let the work settle where it wants to.",
+    quote:"I didn't lose the path. I just found out what it was for.",
+    relate:["Changing your route home to see what's on the other street","Learning a new skill just to finish one sentence of a project","Having a camera roll full of oddly specific details"]}
+  ],
+  questions:[
+   {q:"You're given an empty room, a week, and no brief. What is your first move?",a:[
+     {t:"Walk out the door and see what finds you.",s:{wa:2}},
+     {t:"Gather odd objects and see what collides.",s:{al:2}},
+     {t:"Sketch a plan for what each corner will do.",s:{ar:2}},
+     {t:"Visit places and collect what you already love.",s:{cu:2}}]},
+   {q:"Your finished piece is on the table. What do you find yourself obsessing over?",a:[
+     {t:"Whether every element truly earned its place.",s:{cu:2}},
+     {t:"What you discovered while making it.",s:{wa:2}},
+     {t:"How everything fits together.",s:{ar:2}},
+     {t:"One surprising combination that shouldn't work, but does.",s:{al:2}}]},
+   {q:"Where does your best inspiration tend to come from?",a:[
+     {t:"Strangers, side streets and accidents.",s:{wa:2}},
+     {t:"Clashing genres and crossed wires.",s:{al:2}},
+     {t:"Old collections, galleries and thrift-shop shelves.",s:{cu:2}},
+     {t:"Blueprints, systems and how things get built.",s:{ar:2}}]},
+   {q:"Someone tells you your work is “a bit much.” What do you do?",a:[
+     {t:"Take the note to a brand-new project.",s:{wa:2}},
+     {t:"Edit ruthlessly until every part earns its place.",s:{cu:2}},
+     {t:"Add one more unexpected ingredient.",s:{al:2}},
+     {t:"Simplify the structure and keep the skeleton.",s:{ar:2,cu:1}}]},
+   {q:"You can choose one collaborator for a week. Who do you pick?",a:[
+     {t:"Someone with impeccable taste.",s:{cu:2}},
+     {t:"Someone who says “let's get lost” and means it.",s:{wa:2}},
+     {t:"Someone who finishes what you start.",s:{ar:2}},
+     {t:"Someone whose ideas collide with yours.",s:{al:2}}]},
+   {q:"You hit a creative block. What gets you moving again?",a:[
+     {t:"Changing location, medium or hour of the day.",s:{wa:2}},
+     {t:"Breaking the problem into smaller constraints.",s:{ar:2}},
+     {t:"Mixing the wrong ingredients on purpose.",s:{al:2}},
+     {t:"Revisiting work you admire until something clicks.",s:{cu:2}}]},
+   {q:"What would you most like someone to say about your work?",a:[
+     {t:"“It seems to be going somewhere new.”",s:{wa:2}},
+     {t:"“Every detail felt chosen.”",s:{cu:2}},
+     {t:"“I have never seen anything like it.”",s:{al:2}},
+     {t:"“It feels built to last.”",s:{ar:2}}]}
+  ]},
+
+{ id:"unexpected", n:7, title:"How Do You Respond to the Unexpected?", category:"Habits and Tendencies", minutes:3, status:"soon", accent:"#B6A3D7",
+  blurb:"Cancelled plans, wrong turns and happy accidents: what your reflexes do when the script changes." },
+{ id:"myth", n:8, title:"Which Mythical Archetype Matches Your Story?", category:"Personality Archetypes", minutes:4, status:"soon", accent:"#E6D7B5",
+  blurb:"Original myths for a modern life. Find the legend your choices are quietly writing." },
+{ id:"lead", n:9, title:"What Kind of Main Character Would You Be?", category:"Social Energy", minutes:3, status:"soon", accent:"#D8B4F0",
+  blurb:"Entrances, side quests and spotlight habits, explored through the way you move through a crowd." },
+{ id:"decide", n:10, title:"What Does Your Decision-Making Style Reveal?", category:"Decision-Making", minutes:4, status:"soon", accent:"#9D86D6",
+  blurb:"Menus, crossroads and one-way doors: how you choose says more than what you choose." }
+];
+
+const OPEN = QUIZZES.filter(q => q.status === "open");
+const quizById = id => QUIZZES.find(q => q.id === id);
+const resOf = (q, id) => q && q.results && q.results.find(r => r.id === id);
+// Validate quiz data at load
+OPEN.forEach(q => q.questions.forEach(qq => { if (!Array.isArray(qq.a)) throw new Error("bad question in " + q.id); }));
+
+/* ============================================================
+   UTILITIES
+   ============================================================ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const mem = {};
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return mem["L" + k] !== undefined ? mem["L" + k] : d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { mem["L" + k] = v; return false; } },
+  sget(k, d) { try { const v = sessionStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return mem["S" + k] !== undefined ? mem["S" + k] : d; } },
+  sset(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) { mem["S" + k] = v; } }
+};
+const reduceMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const lcFirst = s => s.charAt(0).toLowerCase() + s.slice(1);
+
+function rng(seed) {
+  let h = 1779033703 ^ seed.length;
+  for (let i = 0; i < seed.length; i++) { h = Math.imul(h ^ seed.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+  let a = h >>> 0;
+  return () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+}
+
+/* Sigil geometry: one generator shared by SVG and canvas renderers */
+function geom(seed) {
+  const r = rng(seed), n = 5 + Math.floor(r() * 4), rot = r() * Math.PI * 2, pts = [];
+  for (let i = 0; i < n; i++) { const a = rot + i / n * Math.PI * 2, rad = 46 + r() * 40; pts.push([100 + Math.cos(a) * rad, 100 + Math.sin(a) * rad]); }
+  const edges = [];
+  for (let i = 0; i < n; i++) { edges.push([i, (i + 1) % n]); if (r() > .42) edges.push([i, (i + 2) % n]); }
+  const rings = [24 + r() * 10, 56 + r() * 8, 90];
+  const dots = []; for (let i = 0; i < 16; i++) dots.push([100 + (r() - .5) * 196, 100 + (r() - .5) * 196, .6 + r() * 1.3]);
+  const ma = r() * Math.PI * 2, moon = [100 + Math.cos(ma) * (74 + r() * 14), 100 + Math.sin(ma) * (74 + r() * 14), 6 + r() * 6];
+  return { pts, edges, rings, dots, moon };
+}
+function sigilInner(seed, accent) {
+  const g = geom(seed);
+  return g.rings.map((r, i) => `<circle cx="100" cy="100" r="${r.toFixed(1)}" fill="none" stroke="#B6A3D7" stroke-opacity="${.55 - i * .12}" stroke-width=".7" ${i === 1 ? 'stroke-dasharray="2 4"' : 'class="dr" pathLength="1"'}/>`).join("")
+    + g.edges.map(([a, b]) => `<line x1="${g.pts[a][0].toFixed(1)}" y1="${g.pts[a][1].toFixed(1)}" x2="${g.pts[b][0].toFixed(1)}" y2="${g.pts[b][1].toFixed(1)}" stroke="${accent}" stroke-opacity=".75" stroke-width=".9" class="dr" pathLength="1"/>`).join("")
+    + g.pts.map(p => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="2.4" fill="${accent}"/>`).join("")
+    + g.dots.map(d => `<circle cx="${d[0].toFixed(1)}" cy="${d[1].toFixed(1)}" r="${d[2].toFixed(1)}" fill="#F4F0F7" fill-opacity=".55"/>`).join("")
+    + `<circle cx="${g.moon[0].toFixed(1)}" cy="${g.moon[1].toFixed(1)}" r="${g.moon[2].toFixed(1)}" fill="#E6D7B5"/><circle cx="${(g.moon[0] + 3).toFixed(1)}" cy="${(g.moon[1] - 2).toFixed(1)}" r="${(g.moon[2] * .85).toFixed(1)}" fill="#14101e"/>`
+    + `<circle cx="100" cy="100" r="3" fill="none" stroke="${accent}" stroke-width=".8"/>`;
+}
+const sigilSVG = (seed, accent, cls = "") => `<svg class="${cls}" viewBox="0 0 200 200" aria-hidden="true" focusable="false">${sigilInner(seed, accent)}</svg>`;
+let covN = 0;
+function coverSVG(seed, accent) {
+  const id = "cg" + (++covN), r = rng(seed + "c");
+  const gx = 20 + r() * 60, gy = 20 + r() * 60, s = r() * 360;
+  let stars = ""; for (let i = 0; i < 40; i++) stars += `<circle cx="${(r() * 400).toFixed(0)}" cy="${(r() * 240).toFixed(0)}" r="${(.4 + r() * 1.1).toFixed(1)}" fill="#F4F0F7" fill-opacity="${(.2 + r() * .5).toFixed(2)}"/>`;
+  const off = (r() - .5) * 70;
+  return `<svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><defs><radialGradient id="${id}" cx="${gx}%" cy="${gy}%" r="80%"><stop offset="0" stop-color="#6547A8" stop-opacity=".7"/><stop offset=".55" stop-color="#21172E"/><stop offset="1" stop-color="#0B0A12"/></radialGradient></defs><rect width="400" height="240" fill="url(#${id})"/>${stars}<g transform="translate(${200 + off} 120) scale(1.05) translate(-100 -100)">${sigilInner(seed, accent)}</g><rect x="8" y="8" width="384" height="224" fill="none" stroke="#E6D7B5" stroke-opacity=".22" stroke-width=".7"/></svg>`;
+}
+
+/* ============================================================
+   SCORING ENGINE + COMPARISON
+   ============================================================ */
+function scoreQuiz(quiz, answers) {
+  const tot = {}, last = {}, order = quiz.results.map(r => r.id), L = quiz.questions.length - 1;
+  order.forEach(id => { tot[id] = 0; last[id] = 0; });
+  answers.forEach((ai, qi) => { const sc = quiz.questions[qi].a[ai].s; for (const k in sc) { tot[k] += sc[k]; if (qi === L) last[k] += sc[k]; } });
+  const ranked = order.slice().sort((a, b) => tot[b] - tot[a] || last[b] - last[a] || order.indexOf(a) - order.indexOf(b));
+  return { tot, ranked, top: ranked[0], second: ranked[1] };
+}
+const LEVELS = ["rarely a priority", "a light touch", "a core habit", "second nature"];
+function compareResults(quiz, aId, bId) {
+  const A = resOf(quiz, aId), B = resOf(quiz, bId);
+  const d = quiz.axes.map((ax, i) => ({ ax, a: A.vec[i], b: B.vec[i], d: Math.abs(A.vec[i] - B.vec[i]) }));
+  const avg = d.reduce((s, x) => s + x.d, 0) / d.length;
+  let sim = d.filter(x => x.a >= 2 && x.b >= 2).map(x => `You both rely on ${x.ax.toLowerCase()}, so that part of the work needs no translation.`);
+  if (!sim.length) sim = d.filter(x => x.a <= 1 && x.b <= 1).slice(0, 1).map(x => `Neither of you leans hard on ${x.ax.toLowerCase()}, which keeps things easygoing.`);
+  if (!sim.length) { const m = d.slice().sort((x, y) => x.d - y.d)[0]; sim = [`Your closest overlap is ${m.ax.toLowerCase()}: ${LEVELS[m.a]} for you, ${LEVELS[m.b]} for your friend.`]; }
+  let diff = d.filter(x => x.d >= 2).sort((x, y) => y.d - x.d).map(x => `${x.ax}: you treat it as ${LEVELS[x.a]}; your friend treats it as ${LEVELS[x.b]}.`);
+  if (!diff.length) { const m = d.slice().sort((x, y) => y.d - x.d)[0]; diff = [`The gentlest difference is ${m.ax.toLowerCase()}: ${LEVELS[m.a]} for you, ${LEVELS[m.b]} for your friend.`]; }
+  const wide = d.slice().sort((x, y) => y.d - x.d)[0];
+  const unexpected = aId === bId
+    ? `You landed on the same archetype, so the surprise is in the details: you may use the same instincts in completely different settings.`
+    : `The widest gap sits at ${wide.ax.toLowerCase()}. ${wide.a > wide.b ? "You" : "Your friend"} reach for it far more, which can look like stubbornness to one of you and like reliability to the other.`;
+  const pair = aId === bId ? `Two ${A.name} records in one room: expect shared shorthand and the same blind spots.` : `Where ${A.name} offers ${lcFirst(A.strengths[0])}, ${B.name} offers ${lcFirst(B.strengths[0])}.`;
+  let band;
+  if (aId === bId) band = ["Mirror records", "You trade in the same currency. Enjoy the shorthand, and borrow each other's blind spots as a checklist."];
+  else if (avg <= 1.25) band = ["Harmonic neighbors", "Different names, familiar rhythms. You'd likely find each other's habits reassuring rather than strange."];
+  else if (avg <= 2) band = ["Productive friction", "Enough overlap to understand each other, enough difference to keep things interesting."];
+  else band = ["Opposite poles", "On paper you pull in opposite directions, which is exactly why a joint project could cover so much ground."];
+  return { A, B, sim, diff, unexpected, pair, band };
+}
+
+/* ============================================================
+   STATE
+   ============================================================ */
+let SESS = store.sget("pa.session", {});
+let CHAL = store.sget("pa.challenge", {});
+let SAVED = store.get("pa.saved", []);
+let QS = { id: null, stage: "welcome", i: 0, ans: [], dir: 1, done: null };
+let EX = { q: "", cat: "All", open: false };
+let CMP = { quiz: "villain", consent: false, a: null, b: null };
+let LUCKY_LAST = null;
+
+const isSaved = (q, r) => SAVED.some(s => s.q === q && s.r === r);
+function persistSaved() { if (!store.set("pa.saved", SAVED)) toast("Saving isn't available in this browser, so this result will only last until you close the page."); }
+
+/* ============================================================
+   UI HELPERS
+   ============================================================ */
+function toast(msg) {
+  const t = document.createElement("div"); t.className = "toast"; t.textContent = msg;
+  $("#toasts").appendChild(t); setTimeout(() => t.remove(), 3600);
+}
+let lastFocus = null;
+function openModal(html, wide) {
+  closeModal(true);
+  lastFocus = document.activeElement;
+  const root = $("#modal-root");
+  root.innerHTML = `<div class="mb" data-act="backdrop"><div class="modal${wide ? " wide" : ""}" role="dialog" aria-modal="true" aria-labelledby="mt">${html}<button class="x" data-act="closeModal" aria-label="Close dialog">×</button></div></div>`;
+  const m = $(".modal", root); const f = $("[data-focus]", m) || $("button,a,input,select", m); if (f) f.focus();
+  document.body.style.overflow = "hidden";
+}
+function closeModal(silent) {
+  $("#modal-root").innerHTML = ""; document.body.style.overflow = "";
+  if (!silent && lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
+}
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
+  try { const ta = document.createElement("textarea"); ta.value = text; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(ta); ta.select(); const ok = document.execCommand("copy"); ta.remove(); return ok; } catch (e) { return false; }
+}
+async function copyLink(url, label) { const ok = await copyText(url); toast(ok ? (label || "Link copied.") : "Couldn't copy automatically. Select the link and copy it manually."); }
+const resultUrl = (q, r) => `${BASE()}#/result/${q}/${r}`;
+const inviteUrl = (q, r) => `${BASE()}#/quiz/${q}?from=${r}`;
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+function quizCard(q) {
+  const open = q.status === "open";
+  return `<article class="card">
+    <a class="cover" href="#/quiz/${q.id}" tabindex="-1" aria-hidden="true">${coverSVG(q.id, q.accent)}</a>
+    <span class="no">No. ${String(q.n).padStart(3, "0")}</span>${open ? "" : `<span class="tag-up">Upcoming</span>`}
+    <div class="card-b">
+      <span class="chip">${esc(q.category)}</span>
+      <h3>${esc(q.title)}</h3>
+      <p>${esc(q.blurb)}</p>
+      <div class="meta"><span>${open ? "About " + q.minutes + " min" : "Estimated " + q.minutes + " min"}</span><span>${open ? q.questions.length + " questions" : "Questions in preparation"}</span></div>
+      ${open ? `<a class="btn small" href="#/quiz/${q.id}">Begin Exploration</a>` : `<span class="btn small quiet" aria-disabled="true">Opening soon</span>`}
+    </div></article>`;
+}
+function archCard(q, r) {
+  return `<button class="card sig-card" data-act="arch" data-q="${q.id}" data-r="${r.id}" aria-label="Open archetype: ${esc(r.name)}">
+    <div class="sbox">${sigilSVG(q.id + r.id, r.accent)}</div>
+    <div class="card-b"><span class="chip">${esc(q.title.replace(/\?$/, ""))}</span><h3>${esc(r.name)}</h3><p>${esc(r.tag)}</p></div></button>`;
+}
+function emptyState(title, text, btn) { return `<div class="empty"><h3>${title}</h3><p class="muted">${text}</p>${btn || ""}</div>`; }
+
+/* ============================================================
+   VIEWS
+   ============================================================ */
+function viewHome() {
+  const f = quizById("villain"), n = quizById("creative"), e = quizById("trio");
+  const rec = (q, r, i) => `<div class="rec" aria-hidden="true"><small>Record ${String(i).padStart(3, "0")}</small>${sigilSVG(q.id + r.id, r.accent)}<b>${esc(r.name)}</b><i>${esc(r.tag.split(",")[0])}</i></div>`;
+  const catHtml = CATEGORIES.map(c => {
+    const qs = QUIZZES.filter(q => q.category === c), o = qs.filter(q => q.status === "open").length;
+    return `<a class="cat" href="#/explore?cat=${encodeURIComponent(c)}"><b>${c}</b><span>${o ? o + " open" : "Opening soon"}${qs.length - o ? ` · ${qs.length - o} upcoming` : ""}</span></a>`;
+  }).join("");
+  const sample = [].concat(...OPEN.map(q => q.results.map(r => [q, r]))).filter((_, i) => i % 3 === 0).slice(0, 4);
+  return `
+  <section class="hero" aria-labelledby="h1"><canvas id="parts" aria-hidden="true"></canvas>
+   <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow stg" style="--d:0s">The human experience, catalogued</p>
+      <h1 id="h1" tabindex="-1">${"Which version of you have you never met?".split(" ").map((w, i) => `<span class="w" style="--i:${i}">${w}</span>`).join(" ")}</h1>
+      <p class="lede stg" style="--d:.9s">Explore your instincts, your imagination, your choices, and the stories you tell yourself. Every quiz reveals a different perspective.</p>
+      <div class="row cta stg" style="--d:1.1s"><a class="btn primary" href="#/explore">Enter the Archive</a><a class="btn" href="#/discover">Explore the Records</a></div>
+      <p class="fine stg" style="--d:1.3s">No labels. Just new perspectives.</p>
+    </div>
+    <div class="hero-visual">
+      <svg class="rings" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="190" fill="none" stroke="#E6D7B5" stroke-opacity=".35" stroke-width=".8"/><circle cx="200" cy="200" r="150" fill="none" stroke="#B6A3D7" stroke-opacity=".3" stroke-dasharray="1 7" stroke-width="1.4"/><circle cx="200" cy="200" r="110" fill="none" stroke="#6547A8" stroke-opacity=".7" stroke-width=".8"/>${Array.from({ length: 48 }, (_, i) => { const a = i / 48 * 6.2832, l = i % 4 ? 5 : 11; return `<line x1="${(200 + Math.cos(a) * 190).toFixed(1)}" y1="${(200 + Math.sin(a) * 190).toFixed(1)}" x2="${(200 + Math.cos(a) * (190 - l)).toFixed(1)}" y2="${(200 + Math.sin(a) * (190 - l)).toFixed(1)}" stroke="#E6D7B5" stroke-opacity=".5" stroke-width=".8"/>`; }).join("")}<circle cx="${200 + Math.cos(1) * 190}" cy="${200 + Math.sin(1) * 190}" r="5" fill="#E6D7B5"/></svg>
+      ${rec(quizById("villain"), quizById("villain").results[2], 14)}${rec(quizById("creative"), quizById("creative").results[2], 27)}${rec(quizById("trio"), quizById("trio").results[1], 41)}
+      <p class="tagline">Every answer opens another door.</p>
+    </div>
+   </div></section>
+
+  <section class="sec" id="records" aria-labelledby="rh"><div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Handpicked from the stacks</p><h2 id="rh" tabindex="-1">Records Worth Opening</h2></div><p class="muted">Selections are editorial. Popularity rankings will appear here only once real usage data exists.</p></div>
+    <div class="feat">
+      <article class="feat-main"><div class="cover" aria-hidden="true">${coverSVG(f.id, f.accent)}</div>
+        <div class="in"><span class="chip gold">Featured exploration</span><h3>${esc(f.title)}</h3><p class="lede" style="font-size:1.05rem">${esc(f.blurb)}</p><div class="meta" style="margin-bottom:1.2rem"><span>About ${f.minutes} min</span><span>${f.questions.length} questions</span><span>${f.results.length} possible archetypes</span></div><a class="btn primary" href="#/quiz/${f.id}">Begin Exploration</a></div></article>
+      <div class="feat-side">${quizCard(n).replace('<span class="chip">', '<span class="chip gold">New addition · ').replace("</span><h3", "</span><h3")}${quizCard(e).replace('<span class="chip">', '<span class="chip gold">Editor\'s Pick · ')}</div>
+      <div class="lucky"><div><h3>Not sure where to begin?</h3><p class="muted" style="margin:.2rem 0 0">Open a random record and see what it says.</p></div><button class="btn" data-act="random">Open a random quiz</button></div>
+    </div></div></section>
+
+  <section class="sec" style="padding-top:0" aria-labelledby="ch"><div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Eight wings of the archive</p><h2 id="ch" tabindex="-1">Choose a wing</h2></div></div>
+    <div class="cats">${catHtml}</div></div></section>
+
+  <section class="sec" style="padding-top:0" aria-labelledby="ah"><div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">A glimpse of the collection</p><h2 id="ah" tabindex="-1">Archetypes on file</h2></div><a class="btn" href="#/archetypes">Open the library</a></div>
+    <div class="grid">${sample.map(([q, r]) => archCard(q, r)).join("")}</div></div></section>`;
+}
+
+function filteredQuizzes() {
+  const t = EX.q.trim().toLowerCase();
+  return QUIZZES.filter(q => (EX.cat === "All" || q.category === EX.cat) && (!EX.open || q.status === "open") && (!t || (q.title + " " + q.blurb + " " + q.category).toLowerCase().includes(t)));
+}
+function exploreResults() {
+  const list = filteredQuizzes();
+  return `<p class="muted" role="status" aria-live="polite" style="margin:0 0 1.2rem">${list.length} ${list.length === 1 ? "record" : "records"} shown</p>` +
+    (list.length ? `<div class="grid">${list.map(quizCard).join("")}</div>` : emptyState("Nothing filed under that.", "Try a different word, or clear the filters to see the whole archive.", `<button class="btn" data-act="clearFilters">Clear filters</button>`));
+}
+function viewExplore() {
+  return `<div class="wrap" style="padding:3rem 0 2rem"><p class="eyebrow">The full catalogue</p><h1 tabindex="-1" style="font-size:clamp(2.4rem,6vw,4.4rem);margin-bottom:1rem">Explore Quizzes</h1>
+   <p class="lede">Three records are open now. The rest are clearly marked as upcoming while they're being catalogued.</p>
+   <div class="filters" style="margin-top:2rem"><div class="search"><label class="sr" for="q">Search quizzes</label><input id="q" type="search" placeholder="Search by title, theme or category" value="${esc(EX.q)}" autocomplete="off"></div>
+   <div class="chips" role="group" aria-label="Filter by category">${["All"].concat(CATEGORIES).map(c => `<button data-act="cat" data-cat="${esc(c)}" aria-pressed="${EX.cat === c}">${c}</button>`).join("")}</div>
+   <label class="check"><input type="checkbox" id="onlyopen" ${EX.open ? "checked" : ""}> Show open records only</label></div>
+   <div id="exres">${exploreResults()}</div></div>`;
+}
+
+/* ---------- Quiz ---------- */
+function viewQuiz(id, query) {
+  const q = quizById(id);
+  if (!q) return viewNotFound();
+  if (q.status !== "open") return `<div class="narrow qwrap"><a class="back-link" href="#/explore">← All quizzes</a><div class="empty"><span class="chip">Upcoming</span><h1 tabindex="-1" style="font-size:2.6rem;margin:1rem 0">${esc(q.title)}</h1><p class="muted">${esc(q.blurb)}</p><p>This record is still being catalogued, so it isn't playable yet. Try one of the open quizzes in the meantime.</p><div class="row" style="justify-content:center"><a class="btn primary" href="#/quiz/villain">Begin an open quiz</a><a class="btn" href="#/explore">Back to the archive</a></div></div></div>`;
+  if (QS.id !== id) QS = { id, stage: "welcome", i: 0, ans: [], dir: 1, done: null };
+  const from = query.get("from");
+  if (from && resOf(q, from)) { CHAL[id] = from; store.sset("pa.challenge", CHAL); }
+  const ch = CHAL[id] && resOf(q, CHAL[id]);
+  if (QS.stage === "welcome") {
+    return `<div class="narrow qwrap welcome"><a class="back-link" href="#/explore">← All quizzes</a>
+     <span class="chip">${esc(q.category)}</span>
+     ${ch ? `<div class="banner" style="margin-top:1rem">A friend shared their result type with you. Finish this quiz to compare. They did not share any answers, and neither will you.</div>` : ""}
+     <div class="cover" aria-hidden="true" style="margin-top:1.2rem">${coverSVG(q.id, q.accent)}</div>
+     <h1 tabindex="-1">${esc(q.title)}</h1><p class="lede">${esc(q.intro)}</p>
+     <ul class="how"><li>${q.questions.length} short scenarios, about ${q.minutes} minutes.</li><li>Choose the answer that feels closest to your first instinct. There are no right or wrong answers.</li><li>You can go back and change any answer before you finish. Your result stays hidden until the last question.</li></ul>
+     <div class="row"><button class="btn primary" data-act="begin">Begin Exploration</button><a class="btn quiet" href="#/explore">Choose another</a></div>
+     <p class="disc">For entertainment and self-reflection only. Results are fictional archetypes, not a diagnosis or a scientific assessment.</p></div>`;
+  }
+  const N = q.questions.length, i = QS.i, cur = q.questions[i], sel = QS.ans[i];
+  const last = i === N - 1;
+  return `<div class="narrow qwrap"><a class="back-link" href="#/explore" data-act="leave">← Leave quiz</a>
+    <div class="progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="${N}" aria-valuenow="${i}" aria-valuetext="Question ${i + 1} of ${N}"><i style="width:${(i + 1) / N * 100}%"></i></div>
+    <div class="pmeta"><span>Question ${i + 1} of ${N}</span><span class="dots" aria-hidden="true">${q.questions.map((_, k) => `<span class="${k < i ? "done" : k === i ? "cur" : ""}"></span>`).join("")}</span></div>
+    <div class="panel ${QS.dir < 0 ? "l" : ""}" id="panel"><h2 id="qt" tabindex="-1">${esc(cur.q)}</h2>
+      <div class="answers" role="radiogroup" aria-labelledby="qt">${cur.a.map((a, k) => `<button class="ans" style="--i:${k}" role="radio" aria-checked="${sel === k}" data-act="pick" data-i="${k}"><span class="k" aria-hidden="true">${k + 1}</span><span>${esc(a.t)}</span></button>`).join("")}</div></div>
+    <div class="qnav"><button class="btn quiet" data-act="back" ${i === 0 ? 'aria-label="Back to welcome screen"' : ""}>Back</button><button class="btn primary" id="nextbtn" data-act="next" ${sel === undefined ? "disabled" : ""}>${last ? "Reveal my record" : "Next"}</button></div>
+    <p class="hint">Tip: press 1 to 4 to choose an answer.</p></div>`;
+}
+function finishQuiz() {
+  const q = quizById(QS.id), sc = scoreQuiz(q, QS.ans);
+  SESS[q.id] = { r: sc.top, second: sc.second, tot: sc.tot, at: Date.now() };
+  store.sset("pa.session", SESS);
+  QS.done = q.id;
+  location.hash = `#/result/${q.id}/${sc.top}`;
+}
+
+/* ---------- Result ---------- */
+function viewResult(qid, rid) {
+  const q = quizById(qid), r = resOf(q, rid);
+  if (!q || !r || q.status !== "open") return viewNotFound();
+  const mine = SESS[qid] && SESS[qid].r === rid;
+  const fresh = QS.done === qid && mine; if (fresh) QS.done = null;
+  const saved = isSaved(qid, rid);
+  const chal = CHAL[qid];
+  const related = QUIZZES.filter(x => x.id !== qid && x.status === "open");
+  let bars = "";
+  if (mine && SESS[qid].tot) {
+    const tot = SESS[qid].tot, sum = Object.values(tot).reduce((a, b) => a + b, 0) || 1;
+    bars = `<div class="block" style="grid-column:1/-1"><h3>Archetype resonance</h3><p class="muted">How your answers spread across this archive's archetypes. It's a playful picture, not a measurement.</p><div class="bars">${q.results.slice().sort((a, b) => tot[b.id] - tot[a.id]).map(x => `<div class="bar"><span>${esc(x.name)}</span><div><i style="width:${Math.round(tot[x.id] / sum * 100)}%"></i></div><span>${Math.round(tot[x.id] / sum * 100)}%</span></div>`).join("")}</div></div>`;
+  }
+  const second = mine && SESS[qid].second && resOf(q, SESS[qid].second);
+  return `<div class="wrap ${fresh ? "reveal" : ""}" style="padding-bottom:3rem">
+   <div style="padding-top:1.6rem"><a class="back-link" href="#/explore">← The archive</a></div>
+   ${!mine ? `<div class="banner rv">You're viewing a shared record. <a href="#/quiz/${q.id}">Take the quiz</a> to find your own.</div>` : ""}
+   <section class="res-hero" aria-labelledby="rt"><div class="sigil-box draw">${sigilSVG(q.id + r.id, r.accent)}</div>
+    <div><p class="eyebrow rv" style="animation-delay:.5s">${esc(q.title)}</p><h1 id="rt" tabindex="-1" class="rv" style="animation-delay:.7s">${esc(r.name)}</h1><p class="res-tag rv" style="animation-delay:.9s">${esc(r.tag)}</p><p class="lede rv" style="animation-delay:1.1s">${esc(r.intro)}</p>
+     <div class="row rv" style="animation-delay:1.3s"><button class="btn primary" data-act="share" data-q="${q.id}" data-r="${r.id}">Share your result</button><button class="btn" data-act="${saved ? "unsave" : "save"}" data-q="${q.id}" data-r="${r.id}">${saved ? "Remove from Your Archive" : "Save to Your Archive"}</button></div></div></section>
+   <div class="blocks rv" style="animation-delay:1.5s">
+    <div class="block"><h3>Strengths</h3><ul>${r.strengths.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div>
+    <div class="block"><h3>Possible blind spots</h3><ul>${r.blind.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div>
+    <div class="block"><h3>How you meet a challenge</h3><p>${esc(r.approach)}</p></div>
+    <div class="block"><h3>You might relate to…</h3><ul>${r.relate.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div>
+    <div class="block quote"><blockquote>“${esc(r.quote)}”</blockquote><cite>Signature quote · ${esc(r.name)}</cite></div>
+    ${bars}
+    ${second ? `<div class="block" style="grid-column:1/-1"><h3>Also echoing</h3><p>Your runner-up record is <strong>${esc(second.name)}</strong>: ${esc(second.tag.toLowerCase())}. <a href="#/result/${q.id}/${second.id}">Read that record</a>.</p></div>` : ""}
+   </div>
+   ${mine && chal && resOf(q, chal) ? `<div class="banner"><strong>A friend shared ${esc(resOf(q, chal).name)}.</strong> Compare it with yours, for fun. <a class="btn small primary" style="margin-left:.6rem" href="#/compare/${q.id}/${rid}/${chal}">Compare our archives</a></div>` : ""}
+   <div class="row"><a class="btn primary" href="#/explore">Try another archive</a>${mine ? `<button class="btn" data-act="retake" data-q="${q.id}">Retake the quiz</button>` : `<a class="btn" href="#/quiz/${q.id}">Take this quiz</a>`}<a class="btn" href="#/compare?quiz=${q.id}">Compare with a friend</a></div>
+   <h2 style="margin:3.5rem 0 1.4rem;font-size:2rem">Related quizzes</h2>
+   <div class="grid">${related.map(quizCard).join("") || ""}${QUIZZES.filter(x => x.category === q.category && x.status !== "open" && x.id !== q.id).slice(0, 1).map(quizCard).join("")}</div>
+   <p class="disc">${esc(r.name)} is a fictional entertainment archetype. It isn't a diagnosis, a clinical assessment or a scientific measurement of who you are.</p></div>`;
+}
+
+/* ---------- Archetype library ---------- */
+let ARCH_Q = "all";
+function viewArchetypes() {
+  const groups = OPEN.filter(q => ARCH_Q === "all" || q.id === ARCH_Q);
+  return `<div class="wrap" style="padding:3rem 0 2rem"><p class="eyebrow">Every record on file</p><h1 tabindex="-1" style="font-size:clamp(2.4rem,6vw,4.4rem);margin-bottom:1rem">Archetype Library</h1>
+   <p class="lede">Browse every fictional archetype the archive can currently assign. Select one to read its profile.</p>
+   <div class="chips" style="margin:1.6rem 0" role="group" aria-label="Filter by quiz"><button data-act="archq" data-v="all" aria-pressed="${ARCH_Q === "all"}">All quizzes</button>${OPEN.map(q => `<button data-act="archq" data-v="${q.id}" aria-pressed="${ARCH_Q === q.id}">${esc(q.title.replace(/\?$/, ""))}</button>`).join("")}</div>
+   ${groups.map(q => `<div class="group-h"><h2 style="font-size:2rem">${esc(q.title)}</h2><span class="chip">${q.results.length} archetypes</span></div><div class="grid">${q.results.map(r => archCard(q, r)).join("")}</div>`).join("")}</div>`;
+}
+function archModal(qid, rid) {
+  const q = quizById(qid), r = resOf(q, rid);
+  openModal(`<div style="display:grid;grid-template-columns:120px 1fr;gap:1.2rem;align-items:center;margin-bottom:1rem"><div class="sigil-box" style="padding:8%">${sigilSVG(qid + rid, r.accent)}</div><div><span class="chip">${esc(q.title.replace(/\?$/, ""))}</span><h2 id="mt" style="margin-top:.6rem">${esc(r.name)}</h2></div></div>
+   <p class="res-tag" style="margin-bottom:.6rem">${esc(r.tag)}</p><p>${esc(r.intro)}</p>
+   <p class="serif" style="font-size:1.4rem;font-style:italic;color:var(--champ)">“${esc(r.quote)}”</p>
+   <p style="margin-bottom:.4rem"><strong>Strengths:</strong> ${r.strengths.map(esc).join("; ")}.</p>
+   <div class="row" style="margin-top:1.2rem"><a class="btn primary" data-focus href="#/quiz/${q.id}" data-act="closeModal">Find out if it's you</a><a class="btn" href="#/result/${q.id}/${r.id}" data-act="closeModal">Open full record</a></div>`);
+}
+
+/* ---------- Archive ---------- */
+function viewArchive() {
+  const sess = Object.keys(SESS).filter(k => quizById(k) && !isSaved(k, SESS[k].r));
+  const row = (qid, rid, extra, btns) => { const q = quizById(qid), r = resOf(q, rid); if (!q || !r) return ""; return `<div class="list-row"><div class="mini">${sigilSVG(qid + rid, r.accent)}</div><div class="grow"><span class="chip">${esc(q.title.replace(/\?$/, ""))}</span><h3 style="margin-top:.4rem">${esc(r.name)}</h3><p class="muted" style="margin:0;font-size:.88rem">${extra}</p></div><div class="row"><a class="btn small" href="#/result/${qid}/${rid}">View</a><button class="btn small quiet" data-act="share" data-q="${qid}" data-r="${rid}">Share</button>${btns}</div></div>`; };
+  return `<div class="narrow" style="padding:3rem 0 3rem;width:min(900px,100% - 2.5rem)"><p class="eyebrow">Your private collection</p><h1 tabindex="-1" style="font-size:clamp(2.4rem,6vw,4.2rem);margin-bottom:1rem">Your Archive</h1>
+   <p class="lede">Results appear here only if you choose to save them. They live in this browser on this device, and nowhere else. No account needed.</p>
+   <h2 style="font-size:2rem;margin:2.5rem 0 1rem">Saved results</h2>
+   ${SAVED.length ? SAVED.map(s => row(s.q, s.r, "Saved " + new Date(s.at).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" }), `<button class="btn small quiet" data-act="unsave" data-q="${s.q}" data-r="${s.r}">Remove</button>`)).join("") + `<button class="btn small quiet" data-act="clearAll">Remove all saved results</button>` : emptyState("Nothing saved yet.", "Finish a quiz and choose “Save to Your Archive” to keep a result here.", `<a class="btn primary" href="#/explore">Explore quizzes</a>`)}
+   ${sess.length ? `<h2 style="font-size:2rem;margin:2.5rem 0 1rem">This session</h2><p class="muted">Results from quizzes you've taken since opening the archive. They disappear when you close the tab unless you save them.</p>${sess.map(k => row(k, SESS[k].r, "Not saved", `<button class="btn small" data-act="save" data-q="${k}" data-r="${SESS[k].r}">Save</button>`)).join("")}` : ""}</div>`;
+}
+
+/* ---------- Compare ---------- */
+function cmpBlock(q, aId, bId) {
+  const c = compareResults(q, aId, bId);
+  const col = (r, who) => `<div class="block"><div class="sigil-box">${sigilSVG(q.id + r.id, r.accent)}</div><p class="eyebrow" style="margin-bottom:.3rem">${who}</p><h3 style="color:var(--white)">${esc(r.name)}</h3><p class="muted" style="margin:.3rem 0 0;font-size:.9rem">${esc(r.tag)}</p></div>`;
+  return `<div class="cmp">${col(c.A, "You")}${col(c.B, "Your friend")}</div>
+   <div class="block" style="text-align:center"><p class="eyebrow">Playful summary</p><p class="sum">${c.band[0]}</p><p>${c.band[1]}</p><p class="muted" style="font-size:.84rem;margin:0">For fun only. This is not a scientific measure of compatibility.</p></div>
+   <div class="blocks"><div class="block"><h3>Similar tendencies</h3><ul>${c.sim.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div>
+   <div class="block"><h3>Different approaches</h3><ul>${c.diff.map(s => `<li>${esc(s)}</li>`).join("")}</ul></div>
+   <div class="block"><h3>An unexpected difference</h3><p>${esc(c.unexpected)}</p></div>
+   <div class="block"><h3>If you worked together</h3><p>${esc(c.pair)}</p></div></div>`;
+}
+function viewCompare(parts, query) {
+  if (parts[1]) {
+    const q = quizById(parts[1]);
+    if (!q || q.status !== "open" || !resOf(q, parts[2]) || !resOf(q, parts[3])) return viewNotFound();
+    return `<div class="narrow qwrap" style="width:min(900px,100% - 2.5rem)"><a class="back-link" href="#/compare">← Compare Your Archives</a><p class="eyebrow">${esc(q.title)}</p><h1 tabindex="-1" style="font-size:clamp(2.2rem,5vw,3.6rem)">You and your friend</h1>${cmpBlock(q, parts[2], parts[3])}<div class="row"><a class="btn primary" href="#/compare">Compare another pair</a><a class="btn" href="#/explore">Try another archive</a></div></div>`;
+  }
+  const qp = query.get("quiz"); if (qp && quizById(qp) && quizById(qp).status === "open") CMP.quiz = qp;
+  const q = quizById(CMP.quiz), mine = SESS[q.id] && SESS[q.id].r;
+  const ids = q.results.map(r => r.id); if (!ids.includes(CMP.a)) CMP.a = mine || ids[0]; if (!ids.includes(CMP.b)) CMP.b = ids[1];
+  const opt = (sel) => q.results.map(r => `<option value="${r.id}" ${r.id === sel ? "selected" : ""}>${esc(r.name)}</option>`).join("");
+  return `<div class="narrow" style="padding:3rem 0 4rem;width:min(900px,100% - 2.5rem)"><p class="eyebrow">Optional · entertainment only</p><h1 tabindex="-1" style="font-size:clamp(2.4rem,6vw,4.2rem);margin-bottom:1rem">Compare Your Archives</h1>
+   <p class="lede">Invite a friend to take the same quiz, then see how your archetypes line up. It works without any account or server: the link carries only the archetype you choose to share, never your answers.</p>
+   <div class="field" style="margin-top:2rem"><label for="cq">Quiz</label><select id="cq" data-field="cq">${OPEN.map(x => `<option value="${x.id}" ${x.id === q.id ? "selected" : ""}>${esc(x.title)}</option>`).join("")}</select></div>
+   <div class="block" style="margin:1.4rem 0"><h3>1 · Invite a friend</h3>
+    ${mine ? `<p>Your result for this quiz: <strong>${esc(resOf(q, mine).name)}</strong>.</p>
+     <label class="check"><input type="checkbox" id="consent" ${CMP.consent ? "checked" : ""}> I agree to include my archetype name (not my answers) in the invite link.</label>
+     <div class="row" style="margin-top:1rem"><button class="btn primary" data-act="mkinvite" ${CMP.consent ? "" : "disabled"} id="mkbtn">Create invite link</button></div><div id="invout"></div>`
+      : `<p>Take this quiz first so there's a result to share. You'll be able to create an invite link afterwards.</p><a class="btn primary" href="#/quiz/${q.id}">Take the quiz</a>`}
+    <p class="muted" style="font-size:.86rem;margin-top:1rem">Nothing is uploaded or synced. If your friend finishes the quiz from your link, the comparison appears on their device. Live two-way syncing would need a backend, which this build deliberately doesn't use.</p></div>
+   <div class="block"><h3>2 · Compare two records</h3><p class="muted">If you and a friend have both shared your archetype names, pick them here to see the playful comparison.</p>
+    <div class="field"><label for="ca">You</label><select id="ca" data-field="ca">${opt(CMP.a)}</select></div><div class="field"><label for="cb">Your friend</label><select id="cb" data-field="cb">${opt(CMP.b)}</select></div>
+    <a class="btn primary" href="#/compare/${q.id}/${CMP.a}/${CMP.b}" id="cgo">Show the comparison</a></div></div>`;
+}
+
+/* ---------- Static pages ---------- */
+function viewAbout() {
+  return `<div class="wrap prose"><p class="eyebrow">About the archive</p><h1 tabindex="-1">Every answer opens another door.</h1>
+  <p class="lede">The Personality Archive is a small, curious corner of the internet where short scenarios become fictional archetypes you can read, save and share.</p>
+  <h2>What it is, and isn't</h2><p>Everything here is entertainment and self-reflection. The archetypes are invented, the questions are original, and the results are meant to start a conversation, not to define you. The archive does not diagnose, assess mental health, determine your true identity, or measure traits scientifically.</p>
+  <h2>How results are calculated</h2><ol><li>Each answer adds weighted points to one or more archetypes in that quiz.</li><li>Points are added up across all questions. The archetype with the highest total is your result.</li><li>Ties are settled by the weights on the final question, then by a fixed order. The same answers always give the same result.</li><li>Answer positions are shuffled between questions, so the layout never hints at which archetype an answer belongs to.</li></ol>
+  <h2>Adding a quiz</h2><p>Quizzes are plain data, separate from the interface. Add an object to the <code>QUIZZES</code> list and the explore page, quiz engine, result page, archetype library and comparison all pick it up.</p>
+<pre>{ id: "your-quiz", title, category, minutes, status: "open",
+  axes: ["A", "B", "C", "D"],
+  results: [{ id, name, tag, intro, strengths[], blind[],
+              approach, quote, relate[], vec: [0-3 x4] }],
+  questions: [{ q: "Scenario…",
+               a: [{ t: "Answer", s: { resultId: 2 } } /* x4 */] }] }</pre>
+  <h2>Sharing and optional services</h2><ul><li><strong>Result cards</strong> are drawn in your browser at 1080 × 1920 with safe margins for stories. Download uses the host's save prompt where available; the share button uses your device's share sheet when supported and otherwise copies the link.</li><li><strong>Compare Your Archives</strong> uses links that carry only an archetype code. Real-time syncing between two people would require a backend such as Supabase and an API key, and is not set up here.</li><li><strong>Popularity</strong> labels are editorial. No usage statistics are collected, so none are shown.</li><li><strong>Custom domain</strong> on share cards: set <code>CFG.domain</code> at the top of the script.</li></ul>
+  <p style="margin-top:2rem"><a class="btn primary" href="#/explore">Enter the Archive</a></p></div>`;
+}
+function viewPrivacy() {
+  return `<div class="wrap prose"><p class="eyebrow">Plain-language policy</p><h1 tabindex="-1">Privacy Policy</h1>
+  <p class="lede">The short version: you don't need an account, and your answers stay in your browser.</p>
+  <h2>What the archive collects</h2><p>Nothing is sent to us. There are no accounts, no analytics and no advertising trackers in this build. The quizzes don't ask for your name, age, gender, health details or private history.</p>
+  <h2>What's stored on your device</h2><ul><li><strong>This session:</strong> your latest result for each quiz you take, held in session storage so you can revisit it. It clears when you close the tab.</li><li><strong>Your Archive:</strong> only if you press “Save to Your Archive”, the quiz, archetype and date are stored in this browser's local storage.</li></ul>
+  <h2>Controlling it</h2><p>Remove a saved result any time from <a href="#/archive">Your Archive</a>, or remove them all at once. Clearing your browser's site data also erases everything.</p>
+  <h2>Sharing</h2><p>Share links contain only the quiz and archetype ids. If you create an invite link, it includes your archetype name and nothing else, and only after you tick the consent box. Your individual answers are never included.</p>
+  <h2>Third-party requests</h2><p>Fonts are loaded from Google Fonts, which means your browser contacts Google to fetch them. Nothing else is requested from third parties.</p>
+  <h2>Entertainment notice</h2><p>Results are fictional archetypes for entertainment and self-reflection. They aren't medical, psychological or professional advice.</p></div>`;
+}
+function viewNotFound() {
+  return `<div class="narrow" style="padding:4rem 0"><div class="empty"><p class="eyebrow">Record not found</p><h1 tabindex="-1" style="font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:1rem">This door leads nowhere.</h1><p class="muted">The page you opened doesn't exist, or the link is out of date.</p><div class="row" style="justify-content:center"><a class="btn primary" href="#/explore">Explore quizzes</a><a class="btn" href="#/">Return home</a></div></div></div>`;
+}
+
+/* ============================================================
+   SHARE CARD (1080x1920 canvas)
+   ============================================================ */
+function wrapText(ctx, text, x, y, maxW, lh, maxLines) {
+  const words = text.split(" "); let line = "", lines = [];
+  for (const w of words) { const t = line ? line + " " + w : w; if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; } else line = t; }
+  lines.push(line);
+  if (maxLines && lines.length > maxLines) { lines = lines.slice(0, maxLines); lines[maxLines - 1] = lines[maxLines - 1].replace(/\s*\S*$/, "…"); }
+  lines.forEach((l, i) => ctx.fillText(l, x, y + i * lh));
+  return y + lines.length * lh;
+}
+async function drawCard(q, r) {
+  try { await Promise.all([document.fonts.load('600 100px "Cormorant Garamond"'), document.fonts.load('400 40px "DM Sans"'), document.fonts.load('italic 400 40px "Cormorant Garamond"')]); } catch (e) {}
+  const W = 1080, H = 1920, c = document.createElement("canvas"); c.width = W; c.height = H; const x = c.getContext("2d");
+  let g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, "#21172E"); g.addColorStop(.55, "#120d1c"); g.addColorStop(1, "#0B0A12"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+  g = x.createRadialGradient(540, 640, 20, 540, 640, 640); g.addColorStop(0, "rgba(101,71,168,.55)"); g.addColorStop(1, "rgba(101,71,168,0)"); x.fillStyle = g; x.fillRect(0, 0, W, H);
+  const R = rng(q.id + r.id + "card"); for (let i = 0; i < 110; i++) { x.fillStyle = `rgba(244,240,247,${(.15 + R() * .5).toFixed(2)})`; x.beginPath(); x.arc(R() * W, R() * H, .6 + R() * 1.8, 0, 6.283); x.fill(); }
+  x.strokeStyle = "rgba(230,215,181,.35)"; x.lineWidth = 2; x.strokeRect(60, 60, W - 120, H - 120);
+  // sigil
+  const gm = geom(q.id + r.id), S = 3.1, ox = 540 - 100 * S, oy = 640 - 100 * S, P = p => [ox + p[0] * S, oy + p[1] * S];
+  gm.rings.forEach((rad, i) => { x.beginPath(); x.arc(540, 640, rad * S, 0, 6.283); x.strokeStyle = `rgba(182,163,215,${.6 - i * .14})`; x.lineWidth = 1.6; x.setLineDash(i === 1 ? [6, 12] : []); x.stroke(); }); x.setLineDash([]);
+  x.strokeStyle = r.accent; x.lineWidth = 2.2; gm.edges.forEach(([a, b]) => { const A = P(gm.pts[a]), B = P(gm.pts[b]); x.beginPath(); x.moveTo(A[0], A[1]); x.lineTo(B[0], B[1]); x.stroke(); });
+  x.fillStyle = r.accent; gm.pts.forEach(p => { const A = P(p); x.beginPath(); x.arc(A[0], A[1], 7, 0, 6.283); x.fill(); });
+  x.fillStyle = "rgba(244,240,247,.6)"; gm.dots.forEach(d => { const A = P(d); x.beginPath(); x.arc(A[0], A[1], d[2] * 2.2, 0, 6.283); x.fill(); });
+  const m = P(gm.moon); x.fillStyle = "#E6D7B5"; x.beginPath(); x.arc(m[0], m[1], gm.moon[2] * S, 0, 6.283); x.fill(); x.fillStyle = "#17101f"; x.beginPath(); x.arc(m[0] + 9, m[1] - 6, gm.moon[2] * S * .85, 0, 6.283); x.fill();
+  // text
+  x.textAlign = "center"; x.textBaseline = "alphabetic";
+  x.fillStyle = "#E6D7B5"; x.font = '500 30px "DM Sans", system-ui, sans-serif'; x.letterSpacing = "6px";
+  let y = wrapText(x, q.title.replace(/\?$/, "").toUpperCase(), 540, 1070, 820, 44, 3); x.letterSpacing = "0px";
+  x.fillStyle = "#F4F0F7"; x.font = '600 128px "Cormorant Garamond", Georgia, serif'; y = wrapText(x, r.name, 540, y + 100, 880, 120, 2);
+  x.fillStyle = "#B6A3D7"; x.font = 'italic 400 46px "Cormorant Garamond", Georgia, serif'; y = wrapText(x, r.tag, 540, y + 24, 840, 58, 2);
+  x.fillStyle = "rgba(244,240,247,.86)"; x.font = '400 36px "DM Sans", system-ui, sans-serif'; wrapText(x, r.intro.split(". ")[0].replace(/\.$/, "") + ".", 540, y + 50, 800, 52, 4);
+  x.fillStyle = "#E6D7B5"; x.font = '500 40px "Cormorant Garamond", Georgia, serif'; x.letterSpacing = "8px"; x.fillText("THE PERSONALITY ARCHIVE", 540, 1640); x.letterSpacing = "0px";
+  x.fillStyle = "#B6A3D7"; x.font = '400 30px "DM Sans", system-ui, sans-serif'; x.fillText(SITE(), 540, 1696);
+  return c;
+}
+const toBlob = c => new Promise(res => c.toBlob(res, "image/png"));
+async function openShare(qid, rid) {
+  const q = quizById(qid), r = resOf(q, rid);
+  openModal(`<h2 id="mt">Share your result</h2><p class="muted" role="status">Drawing your card…</p>`, true);
+  const canvas = await drawCard(q, r), url = canvas.toDataURL("image/png");
+  if (!$(".modal")) return;
+  const link = resultUrl(qid, rid);
+  openModal(`<h2 id="mt">Share your result</h2><img class="cardprev" src="${url}" alt="Result card for ${esc(r.name)} from ${esc(q.title)}">
+   <div class="row" style="justify-content:center"><button class="btn primary" data-focus data-act="dl">Download card</button><button class="btn" data-act="nativeshare">Share…</button><button class="btn" data-act="copyres">Copy link</button></div>
+   <p class="muted" style="font-size:.82rem;text-align:center;margin:1rem 0 0">Sized 1080 × 1920 for stories, with safe margins. The link opens only this archetype, never your answers. If download doesn't start, press and hold the card to save it.</p>`, true);
+  SHARE = { canvas, q, r, link };
+}
+let SHARE = null;
+async function doDownload() {
+  const { canvas, r, q } = SHARE, blob = await toBlob(canvas), name = `personality-archive-${q.id}-${r.id}.png`;
+  let dl = null; try { dl = window.claude && (await window.claude.use("downloads")); } catch (e) {}
+  if (dl) { try { await dl.save({ filename: name, data: blob }); toast("Card saved."); } catch (e) { if (!e || e.code !== "declined") toast("Couldn't save the card. Press and hold the image to save it."); } return; }
+  try { const u = URL.createObjectURL(blob), a = document.createElement("a"); a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); toast("Downloading your card."); } catch (e) { toast("Press and hold the image to save it."); }
+}
+async function doNativeShare() {
+  const { canvas, r, q, link } = SHARE, text = `I got ${r.name} in “${q.title}” on The Personality Archive.`;
+  try {
+    const blob = await toBlob(canvas), file = new File([blob], `${r.id}.png`, { type: "image/png" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: q.title, text, url: link }); return; }
+    if (navigator.share) { await navigator.share({ title: q.title, text, url: link }); return; }
+  } catch (e) { if (e && e.name === "AbortError") return; }
+  copyLink(link, "Sharing isn't available here, so the link was copied instead.");
+}
+
+/* ============================================================
+   PARTICLES (hero)
+   ============================================================ */
+let raf = 0;
+const PTR = { x: 0, y: 0, on: false };
+function startParticles() {
+  const cv = $("#parts"); if (!cv) return; const ctx = cv.getContext("2d"), dpr = Math.min(window.devicePixelRatio || 1, 2), P = [], still = reduceMotion(); let w = 0, h = 0;
+  const size = () => { const b = cv.getBoundingClientRect(); w = b.width; h = b.height; cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  size(); const n = Math.round(Math.min(70, Math.max(24, w / 18)));
+  for (let i = 0; i < n; i++) P.push({ x: Math.random() * w, y: Math.random() * h, r: .4 + Math.random() * 1.3, vx: (Math.random() - .5) * .12, vy: -.03 - Math.random() * .16, t: Math.random() * 6, c: Math.random() > .72 ? "230,215,181" : "182,163,215" });
+  const draw = () => { ctx.clearRect(0, 0, w, h); for (const p of P) { if (!still) { p.x += p.vx; p.y += p.vy; p.t += .02; if (p.y < -5) { p.y = h + 5; p.x = Math.random() * w; } if (p.x < -5) p.x = w + 5; if (p.x > w + 5) p.x = -5; } ctx.fillStyle = `rgba(${p.c},${(.2 + .5 * Math.pow(Math.sin(p.t), 2)).toFixed(2)})`; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill(); if (PTR.on) { const dx = p.x - PTR.x, dy = p.y - PTR.y, dd = Math.hypot(dx, dy); if (dd < 130) { ctx.strokeStyle = `rgba(230,215,181,${((1 - dd / 130) * .28).toFixed(2)})`; ctx.lineWidth = .7; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(PTR.x, PTR.y); ctx.stroke(); } } } };
+  const loop = () => { if (!$("#parts")) return; if (!document.hidden) draw(); raf = requestAnimationFrame(loop); };
+  if (still) draw(); else loop();
+  window.addEventListener("resize", () => { if ($("#parts")) { size(); if (still) draw(); } });
+}
+
+/* ============================================================
+   ROUTER
+   ============================================================ */
+function parseHash() {
+  const h = location.hash.replace(/^#\/?/, ""), i = h.indexOf("?"), p = i < 0 ? h : h.slice(0, i);
+  return { parts: p.split("/").filter(Boolean).map(decodeURIComponent), q: new URLSearchParams(i < 0 ? "" : h.slice(i + 1)) };
+}
+const TITLES = { explore: "Explore Quizzes", archetypes: "Archetype Library", archive: "Your Archive", compare: "Compare Your Archives", about: "About", privacy: "Privacy Policy" };
+function route(opts) {
+  opts = opts || {};
+  cancelAnimationFrame(raf);
+  const { parts, q } = parseHash(), r0 = parts[0] || "", main = $("#main");
+  let html, title = "The Personality Archive", nav = r0;
+  try {
+    if (!r0 || r0 === "discover") html = viewHome();
+    else if (r0 === "explore") { if (q.get("cat") && (CATEGORIES.includes(q.get("cat")))) { EX.cat = q.get("cat"); } html = viewExplore(); title = TITLES.explore; }
+    else if (r0 === "quiz" && parts[1]) { html = viewQuiz(parts[1], q); const qq = quizById(parts[1]); if (qq) title = qq.title; nav = "explore"; }
+    else if (r0 === "result" && parts[1] && parts[2]) { html = viewResult(parts[1], parts[2]); const qq = quizById(parts[1]), rr = qq && resOf(qq, parts[2]); if (rr) title = rr.name + " · " + qq.title; nav = "explore"; }
+    else if (r0 === "archetypes") { html = viewArchetypes(); title = TITLES.archetypes; }
+    else if (r0 === "archive") { html = viewArchive(); title = TITLES.archive; }
+    else if (r0 === "compare") { html = viewCompare(parts, q); title = TITLES.compare; nav = "explore"; }
+    else if (r0 === "about") { html = viewAbout(); title = TITLES.about; }
+    else if (r0 === "privacy") { html = viewPrivacy(); title = TITLES.privacy; nav = "about"; }
+    else { html = viewNotFound(); title = "Not found"; }
+  } catch (err) {
+    console.error(err);
+    html = `<div class="narrow" style="padding:4rem 0"><div class="empty"><h1 style="font-size:2.4rem">Something slipped out of the archive.</h1><p class="muted">Reload the page to try again.</p><button class="btn primary" onclick="location.reload()">Reload</button></div></div>`;
+  }
+  main.innerHTML = html; main.classList.remove("pg"); void main.offsetWidth; main.classList.add("pg");
+  document.title = (title === "The Personality Archive" ? title : title + " · The Personality Archive");
+  $$("[data-nav]").forEach(a => a.removeAttribute("aria-current")); const cur = $(`[data-nav="${nav || "discover"}"]`) || (!r0 ? $('[data-nav="discover"]') : null);
+  if (cur && r0) cur.setAttribute("aria-current", "page");
+  $("#links").classList.remove("open"); $("#burger").setAttribute("aria-expanded", "false");
+  closeModal(true);
+  if (r0 === "discover") { const rec = $("#records"); if (rec) setTimeout(() => rec.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth" }), 30); }
+  else if (!opts.keepScroll) window.scrollTo(0, 0);
+  if (!r0 || r0 === "discover") { startParticles(); initHero(); }
+  initReveal(); if ($(".reveal .sigil-box")) setTimeout(burst, 900);
+  if (!opts.keepFocus) { const hd = $("#main h1[tabindex]") || $("#main h2[tabindex]"); if (hd && r0 !== "discover" && r0) hd.focus({ preventScroll: true }); }
+}
+function rerenderQuiz(focusQuestion) {
+  const { parts, q } = parseHash(); $("#main").innerHTML = viewQuiz(parts[1], q);
+  const t = $("#qt") || $("#main h1"); if (t && focusQuestion) t.focus({ preventScroll: true });
+}
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+window.addEventListener("hashchange", () => route());
+$("#burger").addEventListener("click", e => { const o = $("#links").classList.toggle("open"); e.currentTarget.setAttribute("aria-expanded", String(o)); });
+document.addEventListener("click", async e => {
+  const el = e.target.closest("[data-act]"); if (!el) return;
+  const act = el.dataset.act;
+  if (act === "backdrop") { if (e.target === el) closeModal(); return; }
+  if (act === "closeModal") { closeModal(el.tagName === "A"); return; }
+  const { q, r } = el.dataset;
+  switch (act) {
+    case "random": { const pool = OPEN.filter(x => x.id !== LUCKY_LAST); const pick = pool[Math.floor(Math.random() * pool.length)]; LUCKY_LAST = pick.id; location.hash = "#/quiz/" + pick.id; break; }
+    case "cat": EX.cat = el.dataset.cat; $$(".chips button[data-act=cat]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.cat === EX.cat))); $("#exres").innerHTML = exploreResults(); break;
+    case "clearFilters": EX = { q: "", cat: "All", open: false }; route({ keepScroll: true, keepFocus: true }); break;
+    case "begin": QS.stage = "play"; QS.i = 0; QS.ans = []; QS.dir = 1; rerenderQuiz(true); break;
+    case "pick": { const i = +el.dataset.i; QS.ans[QS.i] = i; $$(".ans").forEach((b, k) => b.setAttribute("aria-checked", String(k === i))); const nb = $("#nextbtn"); if (nb) nb.disabled = false; break; }
+    case "next": { const qz = quizById(QS.id); if (QS.ans[QS.i] === undefined) break; if (QS.i === qz.questions.length - 1) finishQuiz(); else { QS.i++; QS.dir = 1; rerenderQuiz(true); } break; }
+    case "back": if (QS.i === 0) { QS.stage = "welcome"; rerenderQuiz(true); } else { QS.i--; QS.dir = -1; rerenderQuiz(true); } break;
+    case "leave": QS = { id: null, stage: "welcome", i: 0, ans: [], dir: 1, done: null }; break;
+    case "retake": QS = { id: q, stage: "welcome", i: 0, ans: [], dir: 1, done: null }; delete CHAL[q]; store.sset("pa.challenge", CHAL); location.hash = "#/quiz/" + q; if (parseHash().parts[0] === "quiz") rerenderQuiz(true); break;
+    case "share": openShare(q, r); break;
+    case "dl": doDownload(); break;
+    case "nativeshare": doNativeShare(); break;
+    case "copyres": copyLink(SHARE.link, "Result link copied."); break;
+    case "save": if (!isSaved(q, r)) { SAVED.push({ q, r, at: Date.now() }); persistSaved(); toast("Saved to Your Archive."); } route({ keepScroll: true, keepFocus: true }); break;
+    case "unsave": SAVED = SAVED.filter(s => !(s.q === q && s.r === r)); persistSaved(); toast("Removed from Your Archive."); route({ keepScroll: true, keepFocus: true }); break;
+    case "clearAll": openModal(`<h2 id="mt">Remove all saved results?</h2><p>This clears everything saved in this browser. You can always retake a quiz.</p><div class="row"><button class="btn primary" data-focus data-act="confirmClear">Remove all</button><button class="btn" data-act="closeModal">Keep them</button></div>`); break;
+    case "confirmClear": SAVED = []; persistSaved(); closeModal(true); toast("All saved results removed."); route({ keepScroll: true, keepFocus: true }); break;
+    case "arch": archModal(q, r); break;
+    case "archq": ARCH_Q = el.dataset.v; route({ keepScroll: true, keepFocus: true }); break;
+    case "mkinvite": { const link = inviteUrl(CMP.quiz, SESS[CMP.quiz].r); $("#invout").innerHTML = `<div class="field" style="margin-top:1rem"><label for="invl">Invite link</label><input type="text" id="invl" readonly value="${esc(link)}"></div><div class="row"><button class="btn" data-act="copyinv">Copy link</button><button class="btn" data-act="shareinv">Share…</button></div>`; $("#invl").select(); break; }
+    case "copyinv": copyLink(inviteUrl(CMP.quiz, SESS[CMP.quiz].r), "Invite link copied."); break;
+    case "shareinv": { const link = inviteUrl(CMP.quiz, SESS[CMP.quiz].r), qz = quizById(CMP.quiz); try { if (navigator.share) { await navigator.share({ title: qz.title, text: "Take this quiz and compare our archives, just for fun.", url: link }); break; } } catch (err) { if (err && err.name === "AbortError") break; } copyLink(link, "Invite link copied."); break; }
+  }
+});
+document.addEventListener("input", e => {
+  if (e.target.id === "q") { EX.q = e.target.value; $("#exres").innerHTML = exploreResults(); }
+});
+document.addEventListener("change", e => {
+  const t = e.target;
+  if (t.id === "onlyopen") { EX.open = t.checked; $("#exres").innerHTML = exploreResults(); }
+  else if (t.id === "consent") { CMP.consent = t.checked; const b = $("#mkbtn"); if (b) b.disabled = !t.checked; if (!t.checked) { const o = $("#invout"); if (o) o.innerHTML = ""; } }
+  else if (t.dataset.field === "cq") { CMP.quiz = t.value; CMP.a = CMP.b = null; CMP.consent = false; route({ keepScroll: true, keepFocus: true }); }
+  else if (t.dataset.field === "ca") { CMP.a = t.value; $("#cgo").href = `#/compare/${CMP.quiz}/${CMP.a}/${CMP.b}`; }
+  else if (t.dataset.field === "cb") { CMP.b = t.value; $("#cgo").href = `#/compare/${CMP.quiz}/${CMP.a}/${CMP.b}`; }
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && $(".modal")) { closeModal(); return; }
+  const m = $(".modal");
+  if (e.key === "Tab" && m) { const f = $$("button,a[href],input,select", m).filter(x => !x.disabled); if (!f.length) return; const a = f[0], b = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); b.focus(); } else if (!e.shiftKey && document.activeElement === b) { e.preventDefault(); a.focus(); } return; }
+  if (/^[1-4]$/.test(e.key) && QS.stage === "play" && $("#panel") && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName)) { const b = $$(".ans")[+e.key - 1]; if (b) b.click(); }
+});
+// Escape closes the mobile menu too
+document.addEventListener("keydown", e => { if (e.key === "Escape" && $("#links").classList.contains("open")) { $("#links").classList.remove("open"); $("#burger").setAttribute("aria-expanded", "false"); $("#burger").focus(); } });
+$("#skip").addEventListener("click", e => { e.preventDefault(); const h = $("#main h1") || $("#main"); h.setAttribute("tabindex", "-1"); h.focus(); });
+
+/* ============================================================
+   MOTION: hero pointer, scroll reveal, card tilt, result burst
+   ============================================================ */
+function initHero() {
+  const h = $(".hero"), v = $(".hero-visual"); if (!h || !v || reduceMotion()) return;
+  h.addEventListener("pointermove", e => {
+    const b = h.getBoundingClientRect(), vb = v.getBoundingClientRect();
+    h.style.setProperty("--hx", (e.clientX - b.left) + "px"); h.style.setProperty("--hy", (e.clientY - b.top) + "px");
+    PTR.x = e.clientX - b.left; PTR.y = e.clientY - b.top; PTR.on = e.pointerType === "mouse";
+    v.style.setProperty("--px", ((e.clientX - (vb.left + vb.width / 2)) / b.width * -34).toFixed(1) + "px");
+    v.style.setProperty("--py", ((e.clientY - (vb.top + vb.height / 2)) / b.height * -34).toFixed(1) + "px");
+  });
+  h.addEventListener("pointerleave", () => { PTR.on = false; v.style.setProperty("--px", "0px"); v.style.setProperty("--py", "0px"); });
+}
+let IO = null;
+function initReveal() {
+  if (IO) IO.disconnect();
+  if (reduceMotion() || !("IntersectionObserver" in window)) return;
+  const els = $$("#main .card, #main .cat, #main .list-row, #main .sec-head, #main .feat-main, #main .lucky, #main .prose h2, #main .prose pre").filter(el => !el.closest(".reveal") && !el.closest(".hero"));
+  IO = new IntersectionObserver(en => en.forEach(x => { if (x.isIntersecting) { x.target.classList.add("in"); IO.unobserve(x.target); } }), { threshold: .08, rootMargin: "0px 0px -6% 0px" });
+  els.forEach(el => { el.classList.add("rv-s"); el.style.setProperty("--d", (Array.from(el.parentElement.children).indexOf(el) % 6 * .07).toFixed(2) + "s"); IO.observe(el); });
+}
+let tiltEl = null;
+function untilt(el) { if (!el) return; ["--rx", "--ry"].forEach(k => el.style.setProperty(k, "0deg")); }
+document.addEventListener("pointermove", e => {
+  if (e.pointerType !== "mouse" || reduceMotion()) return;
+  const c = e.target.closest && e.target.closest(".card");
+  if (tiltEl && tiltEl !== c) { untilt(tiltEl); tiltEl = null; }
+  if (!c) return; tiltEl = c;
+  const b = c.getBoundingClientRect(), px = (e.clientX - b.left) / b.width, py = (e.clientY - b.top) / b.height;
+  c.style.setProperty("--ry", ((px - .5) * 7).toFixed(2) + "deg"); c.style.setProperty("--rx", ((.5 - py) * 7).toFixed(2) + "deg");
+  c.style.setProperty("--mx", (px * 100).toFixed(0) + "%"); c.style.setProperty("--my", (py * 100).toFixed(0) + "%");
+});
+document.addEventListener("pointerout", e => { if (!e.relatedTarget && tiltEl) { untilt(tiltEl); tiltEl = null; } });
+function burst() {
+  if (reduceMotion()) return; const t = $(".reveal .sigil-box"); if (!t) return;
+  const b = t.getBoundingClientRect(), cv = document.createElement("canvas"), dpr = Math.min(window.devicePixelRatio || 1, 2);
+  cv.style.cssText = "position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:70"; cv.setAttribute("aria-hidden", "true");
+  cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; document.body.appendChild(cv);
+  const x = cv.getContext("2d"); x.scale(dpr, dpr); const cx = b.left + b.width / 2, cy = b.top + b.height / 2;
+  const P = Array.from({ length: 80 }, () => { const a = Math.random() * 6.283, sp = 2 + Math.random() * 5; return { x: cx, y: cy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, r: 1 + Math.random() * 2.2, l: 1, c: Math.random() > .5 ? "230,215,181" : "182,163,215" }; });
+  let f = 0;
+  (function loop() {
+    x.clearRect(0, 0, innerWidth, innerHeight); let alive = false;
+    for (const p of P) { p.x += p.vx; p.y += p.vy; p.vx *= .95; p.vy = p.vy * .95 + .04; p.l -= .012; if (p.l > 0) { alive = true; x.fillStyle = `rgba(${p.c},${p.l.toFixed(2)})`; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 6.283); x.fill(); } }
+    if (alive && f++ < 220) requestAnimationFrame(loop); else cv.remove();
+  })();
+}
+
+route({ keepFocus: true });
+</script>
+</body>
+</html>
